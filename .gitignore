@@ -29,6 +29,19 @@ coverage
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
+# Node modules
+node_modules/
+
+# Build directory
+build/
+
+# Ignore macOS system files
+**/.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+ehthumbs.db
+
 # Bower dependency directory (https://bower.io/)
 bower_components
 
@@ -134,3 +147,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Other potential files to ignore
+*.log
+*.swp
+.DS_Store
