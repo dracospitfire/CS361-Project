@@ -15,6 +15,6 @@ export default defineConfig({
   server: {
     // Use VITE_PORT from your .env, or default to a port if not specified
     port: parseInt(process.env.VITE_PORT, 10) || 3000,
-    host: '0.0.0.0',
+    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost',
   }
 })
