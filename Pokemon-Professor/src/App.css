@@ -1,12 +1,283 @@
 #root {
-  
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 100vw;
   height: 100vh;
-  
 }
 
-body {
-  margin: 0;
-  background-color: black;
+html {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
 
+html li {
+  list-style-type: none;
+}
+
+body{
+  margin: 0;
+  background-color: rgb(11, 11, 11);
+  background-size: 20% auto;
+  background-position: 90% 40%;
+  background-repeat: no-repeat;
+  font-family: var(--Franky);
+}
+
+main {
+  flex-grow: 1;
+}
+
+.rest-tool {
+  position: relative;
+  display: inline-block;
+}
+
+.rest-tool-text {
+  visibility: hidden;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 15px;
+  position: absolute;
+  bottom: 80%;
+  left: 110%;
+  font-family: var(--Franky);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.rest-tool-text::after {                                                           /* This is for the triangle under the bubble */
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 11%; 
+  transform: translateY(-50%);
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;                       /* This makes it point to the right */
+}
+
+.rest-tool:hover .rest-tool-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.pokeball-image {
+  width: 30px;
+  height: 30px;
+}
+
+.pokeball-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;                                                            /* Prevent interaction with underlying elements */
+  z-index: 10;                                                                     /* Ensure it's on top */
+  overflow: hidden;                                                               
+}
+
+h1, h2 {
+  color: white;
+  text-align: center;
+  font-family: var(--Franky);
+}
+
+p {
+  color: white;
+  text-align: left;                                                               /* Justified to the left */
+  background-color:  rgb(11, 11, 11);
+  box-shadow: 0 15px 0 rgb(11, 11, 11);
+  margin-top: 1%;                                                                 /* Space around the text */
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 1%;
+}
+
+.animate-spinner {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  border: 1px solid;
+  border-color: white;
+  padding: 10px;
+}
+
+td {
+  color: white;
+  padding: 8px;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: rgb(152, 255, 174);
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: rgb(253, 124, 124);
+}
+
+.edit-icon:hover {
+  color: rgb(0, 255, 55);
+}
+
+.delete-icon:hover {
+  color:red;
+}
+
+tr {
+  border-bottom: 1px solid;
+  border-bottom-color: white;
+}
+
+thead {
+  background-color:rgb(0, 255, 187);
+}
+
+tr:last-child {
+  border-bottom: none; 
+}
+
+button {
+  background-color: whitesmoke;
+  color: black;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  padding: 8px 12px;
+  border-radius: 50px;
+}
+
+form {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;                                                            /* Centers the form elements */
+  max-width: 350px;                                                               
+  margin: 0 auto;
+}
+
+form div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form input[type="checkbox"] {   
+  width: auto;                                                                    /* Ensures checkbox is the same width */                                                            
+  margin-left: 20%;                                                               /* Space between label and checkbox */
+  margin-right: 23%;
+}
+
+form select {   
+  color: black;
+  width: 55%;                                                                     /* Ensures select is the same width as inputs */
+  padding: 5px;
+  box-sizing: border-box;
+  border: 1px solid;                                                              /* Adds border for consistency */
+  border-radius: 5px;                                                             /* Rounded corners */
+  border-color: black;
+  background-color: white;                                                      /* Background color */
+  text-align: center;                                                             /* Centers the text inside the select */
+}
+
+form label {
+  color: rgb(56, 121, 252);
+  width: 60%;                                                                     /* Ensures labels are the same width */
+  text-align: right;                                                              /* Aligns label text to the right */
+  margin-right: 10px;
+}
+
+form input {
+  width: 55%;                                                                     /* Ensures inputs are the same width */
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: whitesmoke;
+  color: black;
+  margin-top: 20px;
+  padding: 8px 12px;
+  border-radius: 50px;
+}
+
+form button:hover {
+  background-color: rgb(217, 115, 251);                                           
+}
+
+nav {
+  width: 100%;                                                                    /* Ensure nav takes full width */
+  text-align: center;                                                             /* Center the navigation links */
+  font-family: var(--Franky);
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;                                                        /* Center the links horizontally */
+  flex-wrap: wrap;                                                                /* Allow wrapping for smaller screens */
+}
+
+nav ul li {
+  margin: 10px 20px;                                                              /* Space between each link */
+}
+
+nav a {
+  color: rgb(127, 245, 214);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav a:hover {
+  color: rgb(0, 85, 255);
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  font-family: var(--Franky);
+  font-size: 18px;
+  color:rgb(127, 245, 214);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;  
+  align-items: center;        
+}
+
+footer a {
+  text-decoration: none; 
+  color: rgb(127, 245, 214);
+  font-weight: bold;
+  transition: color 0.3s ease; 
+}
+
+footer a:hover {
+  color: rgb(0, 85, 255);
 }
