@@ -29,7 +29,7 @@ const lerpAngle = (start, end, t) => {
 };
 
 export const CharacterController = () => {
-  const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls(
+  const { WALK_SPEED, RUN_SPEED, JUMP_FORCE, ROTATION_SPEED } = useControls(
     "Character Control",
     {
       WALK_SPEED: { value: 0.8, min: 0.1, max: 4, step: 0.1 },
@@ -86,10 +86,9 @@ export const CharacterController = () => {
     };
   }, []);
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, mouse }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
-      console.log(get());
       const movement = {
         x: 0,
         z: 0,
@@ -152,7 +151,7 @@ export const CharacterController = () => {
       if (get().jump && !isJumping) {
         console.log("Jumping initiated!");
         setIsJumping(true);
-        vel.y = JUMP_FORCE;   
+        rb.current.applyImpulse({ x: 0, y: JUMP_FORCE, z: 0 }, true);  // Bigger force
         setAnimation("jump");
       }
 
@@ -180,18 +179,26 @@ export const CharacterController = () => {
   });
 
   
-  useEffect(() => {                                      // Handle jump landing
+  useEffect(() => {
     if (rb.current) {
-      const checkGrounded = () => {
-        if (rb.current.linvel().y === 0) {               // Checking if the character has landed
-          setIsJumping(false);                           // Reset jump state
+      const checkLanding = () => {
+        if (rb.current.linvel().y <= 0) {     // Check if the vertical speed is less than or equal to zero
+          setIsJumping(false);                // Landed, reset the jump state
         }
       };
 
-      const interval = setInterval(checkGrounded, 100);  // Check every 100ms
-      return () => clearInterval(interval);              // Cleanup on unmount
+      // Using `requestAnimationFrame` to check every frame
+      const handleFrame = () => {
+        checkLanding();
+        requestAnimationFrame(handleFrame);  // Keep checking every frame
+      };
+
+      requestAnimationFrame(handleFrame);    // Start the frame check loop
     }
-  }, []);
+
+    return () => {
+    };
+  }, [isJumping]);
 
   return (
     <>
@@ -200,7 +207,7 @@ export const CharacterController = () => {
           <group ref={cameraTarget} position-z={1.5} />
           <group ref={cameraPosition} position-y={4} position-z={-4} />
           <group ref={character}>
-            <Character scale={0.18} position-y={-0.25} animation={animation} />
+            <Character scale={0.15} position-y={-0.25} animation={animation} />
           </group>
         </group>
         <CapsuleCollider args={[0.08, 0.15]} />
