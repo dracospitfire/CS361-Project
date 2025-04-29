@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <>
       <PokeballThrow />
-      <h1>PokeCyberpunk City</h1>
+      <h1>Pokémon Professor</h1>
       <Navbar />
       <main>
       </main>
