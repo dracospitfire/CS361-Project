@@ -34,7 +34,7 @@ const Navbar = () => {
       <h1>Nuevo Yue Development Database</h1>
       <nav>
         <ul>
-          <li><Link to="/">Nuevo Yue Home</Link></li>
+          <li><Link to="/homepage">Nuevo Yue Home</Link></li>
           <li><Link to="/poketrainers">Trainers Information</Link></li>
           <li><Link to="/pokemongyms">Pokemon Gyms Information</Link></li>
           <li><Link to="/districts">Districts Information</Link></li>

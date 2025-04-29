@@ -1,3 +1,4 @@
+import CSSwrapper from "../components/CSSwrapper";
 import { KeyboardControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "../components/LabScene/Experience";
@@ -14,6 +15,8 @@ const keyboardMap = [
 
 function App() {
   return (
+    <>
+    <CSSwrapper className="startgame" />
     <KeyboardControls map={keyboardMap}>
       <Canvas
         shadows
@@ -23,6 +26,7 @@ function App() {
         <Experience />
       </Canvas>
     </KeyboardControls>
+    </>
   );
 }
 

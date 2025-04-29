@@ -1,9 +1,12 @@
+import CSSwrapper from "../components/CSSwrapper";
 import PokeballThrow from "../animations/PokeballThrow";
 import Navbar from "../components/Navigation/NavBar";
 
 function HomePage() {
+
   return (
     <>
+      <CSSwrapper className="homepage" />
       <PokeballThrow />
       <h1>Pokémon Professor</h1>
       <Navbar />
