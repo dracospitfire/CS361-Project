@@ -23,6 +23,12 @@ body{
   font-family: var(--Franky);
 }
 
+canvas {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
 main {
   flex-grow: 1;
 }
