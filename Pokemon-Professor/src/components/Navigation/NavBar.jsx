@@ -25,6 +25,17 @@ const Navbar = () => {
 
   return (
     <header>
+      <nav>
+        <Link to="/homepage">Home</Link>
+        |
+        <Link to="/useraccount">Account</Link>
+        |
+        <Link to="/startgame">Game</Link>
+        |
+        <Link to="/gamenews">News</Link>
+        |
+        <Link to="/companyblog">Blog</Link>
+      </nav>
       <div>
       <Link to="/" className="rest-tool" onClick={resetDatabase}>
           <img src="/pokecenter.png" alt="PokeCyberpunk City Logo" width="110" height="100"/>
@@ -32,17 +43,6 @@ const Navbar = () => {
       </Link>
       </div>
       <h1>Nuevo Yue Development Database</h1>
-      <nav>
-        <ul>
-          <li><Link to="/homepage">Nuevo Yue Home</Link></li>
-          <li><Link to="/poketrainers">Trainers Information</Link></li>
-          <li><Link to="/pokemongyms">Pokemon Gyms Information</Link></li>
-          <li><Link to="/districts">Districts Information</Link></li>
-          <li><Link to="/florafaunas">Flora & Faunas Information</Link></li>
-          <li><Link to="/utilitycompanies">Utility Companies Information</Link></li>
-          <li><Link to="/zones">Zones Information</Link></li>
-        </ul>
-      </nav>
     </header>
   );
 };

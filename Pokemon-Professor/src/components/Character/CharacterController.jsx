@@ -7,6 +7,12 @@ import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { Character } from "./Professor";
 
+const isUIFocused = () => {
+  const active = document.activeElement;
+  const levaPanel = document.querySelector(".leva");
+  return levaPanel && levaPanel.contains(active);
+};
+
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
   while (angle < -Math.PI) angle += 2 * Math.PI;
@@ -68,16 +74,24 @@ export const CharacterController = () => {
 
   useEffect(() => {
     const onMouseDown = (e) => {
-      isClicking.current = true;
+      const canvas = document.querySelector('canvas');
+      if (canvas && canvas.contains(e.target)) {
+        isClicking.current = true;
+      } else {
+        isClicking.current = false;
+      }
     };
+
     const onMouseUp = (e) => {
       isClicking.current = false;
     };
+
     document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("mouseup", onMouseUp);
     // touch
     document.addEventListener("touchstart", onMouseDown);
     document.addEventListener("touchend", onMouseUp);
+
     return () => {
       document.removeEventListener("mousedown", onMouseDown);
       document.removeEventListener("mouseup", onMouseUp);
@@ -179,25 +193,23 @@ export const CharacterController = () => {
 
   
   useEffect(() => {
-    if (rb.current) {
-      const checkLanding = () => {
-        if (rb.current.linvel().y <= 0) {     // Check if the vertical speed is less than or equal to zero
-          setIsJumping(false);                // Landed, reset the jump state
-        }
-      };
-
-      // Using `requestAnimationFrame` to check every frame
-      const handleFrame = () => {
-        checkLanding();
-        requestAnimationFrame(handleFrame);  // Keep checking every frame
-      };
-
-      requestAnimationFrame(handleFrame);    // Start the frame check loop
-    }
-
-    return () => {
+    let frameId;
+  
+    const checkLanding = () => {
+      if (rb.current && rb.current.linvel().y <= 0) {
+        setIsJumping(false);
+      }
     };
-  }, [isJumping]);
+  
+    const handleFrame = () => {
+      checkLanding();
+      frameId = requestAnimationFrame(handleFrame);
+    };
+  
+    handleFrame();
+  
+    return () => cancelAnimationFrame(frameId);
+  }, []);
 
   return (
     <>

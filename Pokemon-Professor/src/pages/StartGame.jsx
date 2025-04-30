@@ -1,8 +1,12 @@
 import CSSwrapper from "../components/CSSwrapper";
+import { Suspense } from "react";
+import { useEffect } from "react";
+import { useProgress } from "@react-three/drei";
+import { RiLoader4Fill } from "react-icons/ri"
 import { KeyboardControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "../components/LabScene/Experience";
-
+import { SignOutControls } from "../components/Navigation/SignOut";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -13,21 +17,48 @@ const keyboardMap = [
   { name: "jump", keys: ["Space", "KeyJ"]},
 ];
 
-function App() {
+function Game() {
+
+  useEffect(() => {
+    const handleRightClick = (event) => {
+      event.preventDefault();
+      console.log("Right-click is disabled");
+    };
+
+    document.addEventListener("contextmenu", handleRightClick);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleRightClick);
+    };
+  }, []);
+
+  const { progress } = useProgress(); 
+
+  const gameLoaded = progress === 100;
+  
   return (
     <>
     <CSSwrapper className="startgame" />
-    <KeyboardControls map={keyboardMap}>
-      <Canvas
-        shadows
-        camera={{ position: [3, 3, 3], near: 0.1, fov: 40 }}  
-        >
-        <color attach="background" args={['black']} />
-        <Experience />
-      </Canvas>
-    </KeyboardControls>
+    {!gameLoaded && (
+        <div className="loading-box">
+          <RiLoader4Fill className="animate-spinner" size={70} color="white" />
+          <p className="loading">Loading Game... {Math.floor(progress)}%</p>
+        </div>
+      )}
+      <KeyboardControls map={keyboardMap}>
+        <Canvas
+          shadows
+          camera={{ position: [3, 3, 3], near: 0.1, fov: 40 }}  
+          >
+          <color attach="background" args={['black']} />
+          <Suspense fallback={null}>
+            <SignOutControls />
+            <Experience />
+          </Suspense>
+        </Canvas>
+      </KeyboardControls>
     </>
   );
 }
 
-export default App;
+export default Game;

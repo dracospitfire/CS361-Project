@@ -4,6 +4,7 @@ import { useControls } from "leva";
 import { useRef } from "react";
 import { CharacterController } from "../Character/CharacterController";
 import { Map } from "./Map";
+import { useNavigate } from "react-router-dom";
 
 import citySceneTokyoModel from '../../assets/Models/city_scene_tokyo.glb';
 import medievalFantasyBookModel from '../../assets/Models/medieval_fantasy_book.glb';
@@ -41,12 +42,13 @@ const maps = {
 };
 
 export const Experience = () => {
+
   const shadowCameraRef = useRef();
   const { map } = useControls("Map", {
     map: {
       value: "city_scene_tokyo",        // default selected map
       options: Object.keys(maps),
-    },
+    }
   });
 
   return (
