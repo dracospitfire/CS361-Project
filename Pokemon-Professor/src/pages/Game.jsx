@@ -1,6 +1,7 @@
 import CSSwrapper from "../components/CSSwrapper";
 import { Suspense } from "react";
-import { useEffect } from "react";
+//import { useEffect } from "react";
+import { Preload } from "@react-three/drei";
 import { useProgress } from "@react-three/drei";
 import { RiLoader4Fill } from "react-icons/ri"
 import { KeyboardControls } from "@react-three/drei";
@@ -19,18 +20,17 @@ const keyboardMap = [
 
 function Game() {
 
-  useEffect(() => {
-    const handleRightClick = (event) => {
-      event.preventDefault();
-      console.log("Right-click is disabled");
-    };
+  // useEffect(() => {
+  //   const handleRightClick = (event) => {
+  //     event.preventDefault();
+  //   };
 
-    document.addEventListener("contextmenu", handleRightClick);
+  //   document.addEventListener("contextmenu", handleRightClick);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleRightClick);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleRightClick);
+  //   };
+  // }, []);
 
   const { progress } = useProgress(); 
 
@@ -52,6 +52,7 @@ function Game() {
           >
           <color attach="background" args={['black']} />
           <Suspense fallback={null}>
+            <Preload all />
             <SignOutControls />
             <Experience />
           </Suspense>

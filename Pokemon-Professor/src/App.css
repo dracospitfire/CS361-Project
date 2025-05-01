@@ -6,7 +6,6 @@
 }
 
 html {  
-  
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -30,6 +29,20 @@ body.startgame {
 }
 
 body.homepage {
+  margin: 0;
+  background-color: black;
+  background-size: 20% auto;
+  background-position: 90% 40%;
+  background-repeat: no-repeat; 
+}body.homepage {
+  margin: 0;
+  background-color: black;
+  background-size: 20% auto;
+  background-position: 90% 40%;
+  background-repeat: no-repeat; 
+}
+
+body.accountpage {
   margin: 0;
   background-color: black;
   background-size: 20% auto;

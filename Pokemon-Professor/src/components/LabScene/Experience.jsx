@@ -4,7 +4,6 @@ import { useControls } from "leva";
 import { useRef } from "react";
 import { CharacterController } from "../Character/CharacterController";
 import { Map } from "./Map";
-import { useNavigate } from "react-router-dom";
 
 import citySceneTokyoModel from '../../assets/Models/city_scene_tokyo.glb';
 import medievalFantasyBookModel from '../../assets/Models/medieval_fantasy_book.glb';
@@ -15,28 +14,27 @@ import deDust2WithRealLightModel from '../../assets/Models/de_dust_2_with_real_l
 const maps = {
   castle_on_hills: {
     scale: 3,
-    position: [-6, -7, 0],
+    position: [-6, -7, 0],            // Spawning location on the map
     model: castleOnHills,
   },
   animal_crossing_map: {
     scale: 20,
-    position: [-15, -1, 10],
+    position: [-15, -1, 10],          // Spawning location on the map
     model: animalCrossingModel,
   },
   city_scene_tokyo: {
     scale: 0.72,
-    position: [0, -1, -3.5],
+    position: [-.5, -1, -8.1],        // Spawning location on the map
     model: citySceneTokyoModel,
-    
   },
   de_dust_2_with_real_light: {
     scale: 0.3,
-    position: [-5, -3, 13],
+    position: [-5, -3, 13],           // Spawning location on the map
     model: deDust2WithRealLightModel,
   },
   medieval_fantasy_book: {
     scale: 0.4,
-    position: [-4, 0, -6],
+    position: [-4, 0, -6],            // Spawning location on the map
     model: medievalFantasyBookModel,
   },
 };

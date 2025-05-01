@@ -7,12 +7,6 @@ import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { Character } from "./Professor";
 
-const isUIFocused = () => {
-  const active = document.activeElement;
-  const levaPanel = document.querySelector(".leva");
-  return levaPanel && levaPanel.contains(active);
-};
-
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
   while (angle < -Math.PI) angle += 2 * Math.PI;
@@ -35,6 +29,7 @@ const lerpAngle = (start, end, t) => {
 };
 
 export const CharacterController = () => {
+  
   const { WALK_SPEED, RUN_SPEED, JUMP_FORCE, ROTATION_SPEED } = useControls(
     "Character Control",
     {
@@ -49,6 +44,7 @@ export const CharacterController = () => {
       },
     }
   );
+
   const rb = useRef();
   const container = useRef();
   const character = useRef();
@@ -64,13 +60,6 @@ export const CharacterController = () => {
   const cameraLookAt = useRef(new Vector3());
   const [, get] = useKeyboardControls();
   const isClicking = useRef(false);
-  const [isJumping, setIsJumping] = useState(false);
-
-  const checkGrounded = () => {
-    if (rb.current.linvel().y === 0) {
-      setIsJumping(false);
-    }
-  };
 
   useEffect(() => {
     const onMouseDown = (e) => {
@@ -86,23 +75,26 @@ export const CharacterController = () => {
       isClicking.current = false;
     };
 
-    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mousedown", onMouseDown);  // Mouse Click
     document.addEventListener("mouseup", onMouseUp);
-    // touch
-    document.addEventListener("touchstart", onMouseDown);
+  
+    document.addEventListener("touchstart", onMouseDown); // Mobile Touch
     document.addEventListener("touchend", onMouseUp);
 
     return () => {
       document.removeEventListener("mousedown", onMouseDown);
       document.removeEventListener("mouseup", onMouseUp);
+
       document.removeEventListener("touchstart", onMouseDown);
       document.removeEventListener("touchend", onMouseUp);
     };
+
   }, []);
 
   useFrame(({ camera, mouse }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
+
       const movement = {
         x: 0,
         z: 0,
@@ -118,6 +110,7 @@ export const CharacterController = () => {
       let speed = get().run ? RUN_SPEED : WALK_SPEED;
 
       if (isClicking.current) {
+        console.log("clicking", mouse.x, mouse.y);
         if (Math.abs(mouse.x) > 0.1) {
           movement.x = -mouse.x;
         }
@@ -139,7 +132,7 @@ export const CharacterController = () => {
       }
 
       if (movement.x !== 0 || movement.z !== 0) {
-        characterRotationTarget.current = Math.atan2(movement.x, movement.z);
+        characterRotationTarget.current = Math.atan2(-movement.x, -movement.z);
         vel.x =
           Math.sin(rotationTarget.current + characterRotationTarget.current) *
           speed;
@@ -160,14 +153,6 @@ export const CharacterController = () => {
         0.1
       );
 
-      // JUMPING
-      if (get().jump && !isJumping) {
-        console.log("Jumping initiated!");
-        setIsJumping(true);
-        rb.current.applyImpulse({ x: 0, y: JUMP_FORCE, z: 0 }, true);  // Bigger force
-        setAnimation("jump");
-      }
-
       rb.current.setLinvel(vel, true);
     }
 
@@ -187,36 +172,14 @@ export const CharacterController = () => {
 
       camera.lookAt(cameraLookAt.current);
     }
-
-    checkGrounded();
   });
-
-  
-  useEffect(() => {
-    let frameId;
-  
-    const checkLanding = () => {
-      if (rb.current && rb.current.linvel().y <= 0) {
-        setIsJumping(false);
-      }
-    };
-  
-    const handleFrame = () => {
-      checkLanding();
-      frameId = requestAnimationFrame(handleFrame);
-    };
-  
-    handleFrame();
-  
-    return () => cancelAnimationFrame(frameId);
-  }, []);
 
   return (
     <>
       <RigidBody colliders={false} lockRotations ref={rb} gravity={[0, -9.81, 0]}>
         <group ref={container}>
-          <group ref={cameraTarget} position-z={1.5} />
-          <group ref={cameraPosition} position-y={4} position-z={-4} />
+          <group ref={cameraTarget} position-y={1} position-z={-0} />
+          <group ref={cameraPosition} position-y={2} position-z={4} />
           <group ref={character}>
             <Character scale={0.15} position-y={-0.25} animation={animation} />
           </group>

@@ -12,34 +12,40 @@ function HomePage() {
   const [districts, setDistricts] = useState([]);
 
   const [formData, setFormData] = useState({
-    gymName            : '',
-    gymLeaderID        : '',
-    lowLevelRange      : '',
-    highLevelRange     : '',
-    typeSpecialization : '',
-    numberOfTrainers   : '',
-    badgePrize         : '',
-    districtID         : '',
+    userFirstName : '',
+    userLastName  : '',
+    age           : '',
+    email         : '',
+    address       : '',
+    apt           : '',
+    city          : '',
+    state         : '',
+    zipcode       : '',
+    userName      : '',
+    password      : '',
   });
 
   const handleSubmit = async (e) => {
     // Prevent page reload
     e.preventDefault();
     // Create a new Pokemon Gym object from the formData
-    const newPokemonGym = {
-      gymName            : formData.gymName            || '',
-      gymLeaderID        : formData.gymLeaderID        || null,
-      typeSpecialization : formData.typeSpecialization || null,
-      numberOfTrainers   : formData.numberOfTrainers   || '',
-      lowLevelRange      : formData.lowLevelRange      || '',
-      highLevelRange     : formData.highLevelRange     || '',
-      badgePrize         : formData.badgePrize         || '',
-      districtID         : formData.districtID         || '',
+    const newUser = {
+      userFirstName: formData.userFirstName,
+      userLastName : formData.userLastName,
+      age          : Number(formData.age),
+      email        : formData.email,
+      address      : formData.address,
+      apt          : formData.apt,
+      city         : formData.city,
+      state        : formData.state,
+      zipcode      : formData.zipcode,
+      userName     : formData.userName,
+      password     : formData.password,
     };
 
     try {
-      const URL = import.meta.env.VITE_API_URL + "pokemongyms";
-      const response = await axios.post(URL, newPokemonGym);
+      const URL = import.meta.env.VITE_API_URL + "newuser";
+      const response = await axios.post(URL, newUser);
 
       if (response.status === 201) {
         alert(response.data.message);
@@ -61,14 +67,17 @@ function HomePage() {
 
   const resetFormFields = () => {
     setFormData({
-      gymName            : '',
-      gymLeaderID        : '',
-      lowLevelRange      : '',
-      highLevelRange     : '',
-      typeSpecialization : '',
-      numberOfTrainers   : '',
-      badgePrize         : '',
-      districtID         : '',
+      userFirstName : '',
+      userLastName  : '',
+      age           : '',
+      email         : '',
+      address       : '',
+      apt           : '',
+      city          : '',
+      state         : '',
+      zipcode       : '',
+      userName      : '',
+      password      : '',
     });
   };
 
@@ -105,10 +114,10 @@ function HomePage() {
       <div id="signup-form" className={`signup-slide ${showSignup ? "visible" : "hidden"}`}>
         <h2>Signup</h2>
         <button type="button" onClick={() => setShowSignup(false)}>Cancel</button>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div>
             <label htmlFor="userName">Name:</label>
-            <input
+            <input autoComplete="off"
               type="text"
               name="userFirstName"
               value={formData.userFirstName || '' }
@@ -116,7 +125,7 @@ function HomePage() {
               placeholder="First"
               required
             />
-            <input
+            <input autoComplete="off"
               type="text"
               name="userLastName"
               value={formData.userLastName || '' }
@@ -127,10 +136,10 @@ function HomePage() {
           </div>
           <div>
             <label htmlFor="age">Age:</label>
-            <input
+            <input autoComplete="off"
               type="number"
               name="age"
-              value={formData.lowLevelRange || '' }
+              value={formData.age || '' }
               onChange={handleInputChange}
               min="13"
               max="90"
@@ -141,7 +150,7 @@ function HomePage() {
           </div>
           <div>
             <label htmlFor="email">E-mail:</label>
-            <input
+            <input autoComplete="off"
               type="text"
               name="email"
               value={formData.email || '' }
@@ -152,7 +161,7 @@ function HomePage() {
           </div>
           <div>
             <label htmlFor="address">Address:</label>
-            <input
+            <input autoComplete="off"
               type="text"
               name="address"
               value={formData.address || '' }
@@ -160,7 +169,7 @@ function HomePage() {
               placeholder="42 Wallaby Way"
               required
             />
-            <input
+            <input autoComplete="off"
               type="text"
               name="apt"
               value={formData.apt || '' }
@@ -170,10 +179,10 @@ function HomePage() {
           </div>
           <div>
             <label htmlFor="userName">City, State, Zip:</label>
-            <input
+            <input autoComplete="off"
               type="text"
-              name="userName"
-              value={formData.userName || '' }
+              name="city"
+              value={formData.city || '' }
               onChange={handleInputChange}
               placeholder="Sydney"
               required
@@ -181,16 +190,65 @@ function HomePage() {
             <select
               name="state"
               onChange={handleInputChange}
-              value={formData.typeSpecialization || '' }
-              >
-              <option value=''>State</option>
+              required
+              value={formData.state || ''}
+            >
+              <option value="">State</option>
+              <option value="Alabama">AL</option>
+              <option value="Alaska">AK</option>
+              <option value="Arizona">AZ</option>
+              <option value="Arkansas">AR</option>
               <option value="California">CA</option>
-              <option value="Navada">NV</option>
+              <option value="Colorado">CO</option>
+              <option value="Connecticut">CT</option>
+              <option value="Delaware">DE</option>
+              <option value="Florida">FL</option>
+              <option value="Georgia">GA</option>
+              <option value="Hawaii">HI</option>
+              <option value="Idaho">ID</option>
+              <option value="Illinois">IL</option>
+              <option value="Indiana">IN</option>
+              <option value="Iowa">IA</option>
+              <option value="Kansas">KS</option>
+              <option value="Kentucky">KY</option>
+              <option value="Louisiana">LA</option>
+              <option value="Maine">ME</option>
+              <option value="Maryland">MD</option>
+              <option value="Massachusetts">MA</option>
+              <option value="Michigan">MI</option>
+              <option value="Minnesota">MN</option>
+              <option value="Mississippi">MS</option>
+              <option value="Missouri">MO</option>
+              <option value="Montana">MT</option>
+              <option value="Nebraska">NE</option>
+              <option value="Nevada">NV</option>
+              <option value="New Hampshire">NH</option>
+              <option value="New Jersey">NJ</option>
+              <option value="New Mexico">NM</option>
+              <option value="New York">NY</option>
+              <option value="North Carolina">NC</option>
+              <option value="North Dakota">ND</option>
+              <option value="Ohio">OH</option>
+              <option value="Oklahoma">OK</option>
+              <option value="Oregon">OR</option>
+              <option value="Pennsylvania">PA</option>
+              <option value="Rhode Island">RI</option>
+              <option value="South Carolina">SC</option>
+              <option value="South Dakota">SD</option>
+              <option value="Tennessee">TN</option>
+              <option value="Texas">TX</option>
+              <option value="Utah">UT</option>
+              <option value="Vermont">VT</option>
+              <option value="Virginia">VA</option>
+              <option value="Washington">WA</option>
+              <option value="West Virginia">WV</option>
+              <option value="Wisconsin">WI</option>
+              <option value="Wyoming">WY</option>
             </select>
-            <input
+            <input autoComplete="off"
               type="number"
               name="zipcode"
-              value={formData.userName || '' }
+              value={formData.zipcode || '' }
               onChange={handleInputChange}
               placeholder="12345"
               required
@@ -198,7 +256,7 @@ function HomePage() {
           </div>
           <div>
             <label htmlFor="userName">Username:</label>
-            <input
+            <input autoComplete="off"
               type="text"
               name="userName"
               value={formData.userName || '' }
@@ -209,8 +267,8 @@ function HomePage() {
           </div>
           <div>
             <label htmlFor="password">Password:</label>
-            <input
-              type="text"
+            <input autoComplete="off"
+              type="password"
               name="password"
               value={formData.password || '' }
               onChange={handleInputChange}
