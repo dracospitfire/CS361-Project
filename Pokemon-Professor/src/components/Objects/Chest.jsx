@@ -1,15 +1,19 @@
-import { useGLTF } from '@react-three/drei';
+import { RigidBody, CuboidCollider } from "@react-three/rapier";
+import { useGLTF } from "@react-three/drei";
 import chestModel from '../../assets/Models/chest.glb';
 
-export const Chest = ({ position = [0, 0, 0], scale = 1 }) => {
+export const Chest = ({ position = [0, 0, 0], scale = 1, ...props }) => {
   const { scene } = useGLTF(chestModel);
 
   return (
-    <primitive
-      object={scene}
-      position={position}
-      scale={Array.isArray(scale) ? scale : [scale, scale, scale]}
-      rotation={[0, Math.PI, 0]}
-    />
+    <RigidBody type="fixed" colliders="trimesh" {...props} >
+      <primitive
+        object={scene}
+        position={position}
+        scale={Array.isArray(scale) ? scale : [scale, scale, scale]}
+        rotation={[0, Math.PI, 0]} 
+      />
+      <CuboidCollider args={[0.5, 0.5, 0.5]} position={[0, -.9, -2]} scale={0.15}/>
+    </RigidBody>
   );
 };

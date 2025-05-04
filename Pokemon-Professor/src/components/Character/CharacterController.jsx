@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { Character } from "./Professor";
+import { Html } from "@react-three/drei";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -29,7 +30,7 @@ const lerpAngle = (start, end, t) => {
 };
 
 export const CharacterController = () => {
-  
+  const [hasFallen, setHasFallen] = useState(false);
   const { WALK_SPEED, RUN_SPEED, JUMP_FORCE, ROTATION_SPEED } = useControls(
     "Character Control",
     {
@@ -50,6 +51,7 @@ export const CharacterController = () => {
   const character = useRef();
 
   const [animation, setAnimation] = useState("idle");
+  const [falling, setFalling] = useState(false);
 
   const characterRotationTarget = useRef(Math.PI);
   const rotationTarget = useRef(0);
@@ -91,9 +93,36 @@ export const CharacterController = () => {
 
   }, []);
 
+  const FALL_THRESHOLD = -7;
+  const rotationLerpSpeed = falling ? 0.01 : 0.1;
+  const cameraLerpSpeed = falling ? 0.01 : 0.1;
+
   useFrame(({ camera, mouse }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
+      setFalling(vel.y < -1);
+
+      const pos = rb.current.translation();
+      if (pos.y < FALL_THRESHOLD) {
+        setHasFallen(true);
+
+        rb.current.setTranslation({ x: 0, y: 1, z: 0 }, true);
+        rb.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
+        rb.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
+
+        rotationTarget.current = 0;
+        characterRotationTarget.current = Math.PI;
+
+        if (cameraPosition.current && cameraTarget.current) {
+          cameraPosition.current.position.set(0, 2, 4);
+          cameraTarget.current.position.set(0, 1, 0);
+          cameraLookAt.current.set(0, 1, 0);
+        }
+        setAnimation("idle");
+        setTimeout(() => {
+          setHasFallen(false);
+        }, 2000);
+      }
 
       const movement = {
         x: 0,
@@ -101,10 +130,10 @@ export const CharacterController = () => {
       };
 
       if (get().forward) {
-        movement.z = -1;
+        movement.z = 1;
       }
       if (get().backward) {
-        movement.z = 1;
+        movement.z = -1;
       }
 
       let speed = get().run ? RUN_SPEED : WALK_SPEED;
@@ -121,10 +150,10 @@ export const CharacterController = () => {
       }
 
       if (get().left) {
-        movement.x = -1;
+        movement.x = 1;
       }
       if (get().right) {
-        movement.x = 1;
+        movement.x = -1;
       }
 
       if (movement.x !== 0) {
@@ -132,7 +161,7 @@ export const CharacterController = () => {
       }
 
       if (movement.x !== 0 || movement.z !== 0) {
-        characterRotationTarget.current = Math.atan2(movement.x, movement.z);
+        characterRotationTarget.current = Math.atan2(-movement.x,- movement.z);
         vel.x =
           Math.sin(rotationTarget.current + characterRotationTarget.current) *
           speed;
@@ -147,10 +176,11 @@ export const CharacterController = () => {
       } else {
         setAnimation("idle");
       }
+
       character.current.rotation.y = lerpAngle(
         character.current.rotation.y,
         characterRotationTarget.current,
-        0.1
+        rotationLerpSpeed
       );
 
       rb.current.setLinvel(vel, true);
@@ -160,15 +190,18 @@ export const CharacterController = () => {
     container.current.rotation.y = MathUtils.lerp(
       container.current.rotation.y,
       rotationTarget.current,
-      0.1
+      cameraLerpSpeed
     );
 
     cameraPosition.current.getWorldPosition(cameraWorldPosition.current);
-    camera.position.lerp(cameraWorldPosition.current, 0.1);
+    camera.position.lerp(cameraWorldPosition.current, falling ? 0.01 : 0.1);
 
     if (cameraTarget.current) {
       cameraTarget.current.getWorldPosition(cameraLookAtWorldPosition.current);
-      cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.1);
+      cameraLookAt.current.lerp(
+        cameraLookAtWorldPosition.current,
+        falling ? 0.01 : 0.1
+      );
 
       camera.lookAt(cameraLookAt.current);
     }
@@ -178,7 +211,24 @@ export const CharacterController = () => {
     <>
       <RigidBody colliders={false} lockRotations ref={rb} gravity={[0, -9.81, 0]}>
         <group ref={container} >
-          <group ref={cameraTarget} position-y={1} position-z={-0} />
+        <group ref={cameraTarget} position-y={1} position-z={-0}>
+          {hasFallen && (
+            <Html center>
+              <div
+                style={{
+                  background: "rgba(192, 0, 0, 0.7)",
+                  color: "white",
+                  padding: "10px 20px",
+                  borderRadius: "10px",
+                  fontSize: "1.2rem",
+                  textAlign: "center",
+                }}
+              >
+                Respawned... You have fallen! 
+              </div>
+            </Html>
+          )}
+        </group>
           <group ref={cameraPosition} position-y={2} position-z={4} />
           <group ref={character} >
             <Character scale={0.15} position-y={-0.15} animation={animation} />

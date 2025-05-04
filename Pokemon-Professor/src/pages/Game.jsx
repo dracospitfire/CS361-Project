@@ -1,6 +1,6 @@
 import CSSwrapper from "../components/CSSwrapper";
 import { Suspense } from "react";
-//import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Leva } from "leva";
 import { Preload } from "@react-three/drei";
 import { useProgress } from "@react-three/drei";
