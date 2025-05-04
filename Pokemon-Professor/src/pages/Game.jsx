@@ -1,6 +1,7 @@
 import CSSwrapper from "../components/CSSwrapper";
 import { Suspense } from "react";
 //import { useEffect } from "react";
+import { Leva } from "leva";
 import { Preload } from "@react-three/drei";
 import { useProgress } from "@react-three/drei";
 import { RiLoader4Fill } from "react-icons/ri"
@@ -38,15 +39,16 @@ function Game() {
   
   return (
     <>
-    <CSSwrapper className="startgame" />
-    {!gameLoaded && (
-        <div className="loading-box">
-          <RiLoader4Fill className="animate-spinner" size={70} color="white" />
-          <p className="loading">Loading Game... {Math.floor(progress)}%</p>
-        </div>
-      )}
+      <CSSwrapper className="startgame" />
+      <Leva collapsed />
+      {!gameLoaded && (
+          <div className="loading-box">
+            <RiLoader4Fill className="animate-spinner" size={70} color="white" />
+            <p className="loading">Loading Game... {Math.floor(progress)}%</p>
+          </div>
+        )}
       <KeyboardControls map={keyboardMap}>
-        <Canvas
+        <Canvas 
           shadows
           camera={{ position: [3, 3, 3], near: 0.1, fov: 40 }}  
           >

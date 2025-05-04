@@ -11,7 +11,7 @@ function AccountPage() {
       <CSSwrapper className="accountpage" />
       <PokeballThrow />
       <Navbar />
-      <button onClick={() => navigate("/accountpage")}>Home</button>
+      <button onClick={() => navigate("/homepage")}>Home</button>
     </>
   );
 }

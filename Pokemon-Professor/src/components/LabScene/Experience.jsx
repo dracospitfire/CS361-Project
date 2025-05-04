@@ -4,6 +4,7 @@ import { useControls } from "leva";
 import { useRef } from "react";
 import { CharacterController } from "../Character/CharacterController";
 import { Map } from "./Map";
+import { Chest } from '../Objects/Chest';
 
 import citySceneTokyoModel from '../../assets/Models/city_scene_tokyo.glb';
 import medievalFantasyBookModel from '../../assets/Models/medieval_fantasy_book.glb';
@@ -76,6 +77,7 @@ export const Experience = () => {
           model={maps[map].model}
         />
         <CharacterController />
+        <Chest position={[0, -.9, -2]} scale={0.15} />
       </Physics>
     </>
   );

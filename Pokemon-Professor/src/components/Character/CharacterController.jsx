@@ -51,7 +51,7 @@ export const CharacterController = () => {
 
   const [animation, setAnimation] = useState("idle");
 
-  const characterRotationTarget = useRef(0);
+  const characterRotationTarget = useRef(Math.PI);
   const rotationTarget = useRef(0);
   const cameraTarget = useRef();
   const cameraPosition = useRef();
@@ -101,10 +101,10 @@ export const CharacterController = () => {
       };
 
       if (get().forward) {
-        movement.z = 1;
+        movement.z = -1;
       }
       if (get().backward) {
-        movement.z = -1;
+        movement.z = 1;
       }
 
       let speed = get().run ? RUN_SPEED : WALK_SPEED;
@@ -121,10 +121,10 @@ export const CharacterController = () => {
       }
 
       if (get().left) {
-        movement.x = 1;
+        movement.x = -1;
       }
       if (get().right) {
-        movement.x = -1;
+        movement.x = 1;
       }
 
       if (movement.x !== 0) {
@@ -132,7 +132,7 @@ export const CharacterController = () => {
       }
 
       if (movement.x !== 0 || movement.z !== 0) {
-        characterRotationTarget.current = Math.atan2(-movement.x, -movement.z);
+        characterRotationTarget.current = Math.atan2(movement.x, movement.z);
         vel.x =
           Math.sin(rotationTarget.current + characterRotationTarget.current) *
           speed;
@@ -177,11 +177,11 @@ export const CharacterController = () => {
   return (
     <>
       <RigidBody colliders={false} lockRotations ref={rb} gravity={[0, -9.81, 0]}>
-        <group ref={container}>
+        <group ref={container} >
           <group ref={cameraTarget} position-y={1} position-z={-0} />
           <group ref={cameraPosition} position-y={2} position-z={4} />
-          <group ref={character}>
-            <Character scale={0.15} position-y={-0.25} animation={animation} />
+          <group ref={character} >
+            <Character scale={0.15} position-y={-0.15} animation={animation} />
           </group>
         </group>
         <CapsuleCollider args={[0.08, 0.15]} />

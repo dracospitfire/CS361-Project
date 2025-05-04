@@ -1,57 +1,129 @@
-#root {
-  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  width: 100vw;
-  height: 100vh;
+html {
+  margin: 0%;
   background-color: black;
 }
 
-html {  
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-html li {
-  list-style-type: none;
-}
-
-body.startgame {
-  overflow: hidden;
-  margin: 0;
+body.accountpage {
+  margin: 0%;
   background-color: black;
   background-size: 20% auto;
   background-position: 90% 40%;
-  background-repeat: no-repeat;
-  font-family: var(--Franky);
+  background-repeat: no-repeat; 
+}
+
+body.blogpage {
+  margin: 0%;
+  background-color: black;
+  background-size: 20% auto;
+  background-position: 90% 40%;
+  background-repeat: no-repeat; 
+}
+
+body.startgame {
+  margin: 0%;
+  height: 100vh;
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
 }
 
 body.homepage {
-  margin: 0;
-  background-color: black;
-  background-size: 20% auto;
-  background-position: 90% 40%;
-  background-repeat: no-repeat; 
-}body.homepage {
-  margin: 0;
+  margin: 0%;
+  padding: 0%;
+  width: auto;
+  height: 100%;
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body.homepage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('./assets/Images/background/Pokemon Lab.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(4px);
+  z-index: -1;
+}
+
+body.newspage {
+  margin: 0%;
   background-color: black;
   background-size: 20% auto;
   background-position: 90% 40%;
   background-repeat: no-repeat; 
 }
 
-body.accountpage {
-  margin: 0;
-  background-color: black;
-  background-size: 20% auto;
-  background-position: 90% 40%;
-  background-repeat: no-repeat; 
+
+#root {
+  justify-items: center;
+  margin: 0%;
+  padding: 0%;
+  height: 100%;
+}
+
+header.head-nav {
+  width: 90%;
+  margin: 2%; 
+}
+
+div.logo {
+  background-color: white;
+}
+
+nav.internal-nav {
+  padding: 2%;
+  background-color: rgb(178, 235, 255, 0.7);
+  display: flex;
+  justify-content: right; 
+  gap: 1%;
+  font-family: var(--Franky); 
+  font-size: 25px;
+  color: black;                                                                 /* | Vertical seperators */
+}
+
+nav.external-nav {
+  padding: 2%;
+  display: flex;
+  justify-content: center; 
+  gap: 1%;
+  font-family: var(--Franky); 
+  font-size: 25px;
+  color: black;                                                                 /* | Vertical seperators */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;                                                        /* Center the links horizontally */
+  flex-wrap: wrap;                                                                /* Allow wrapping for smaller screens */
+}
+
+nav ul li {
+  margin: 10px 20px;                                                              /* Space between each link */
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+nav a:hover {
+  color: rgb(0, 85, 255);
 }
 
 main {
-  flex-grow: 1;
+  width: 90%;
+  justify-items: center;
 }
 
 .rest-tool {
@@ -109,23 +181,20 @@ main {
 }
 
 h1, h2 {
-  color: white;
+  color: black;
   text-align: center;
   font-family: var(--Franky);
 }
 
 p {
-  color: white;
+  margin: 0%;
+  padding: 2%;
+  color: black;
+  font-family: var(--Franky);
   text-align: left;                                                               /* Justified to the left */
-  background-color:  rgb(11, 11, 11);
-  box-shadow: 0 15px 0 rgb(11, 11, 11);
-  margin-top: 1%;                                                                 /* Space around the text */
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 1%;
 }
 
-.loading-box {
+p.loading-box {
   background-color: black;
   position: fixed;
   top: 50%;
@@ -148,6 +217,33 @@ p.loading {
   background-color: black;
   box-shadow: none;
 }
+
+p.welcome {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+section.options {
+  justify-items: center;
+}
+
+button.signup {
+  margin: 2%;
+}
+
+button.login {
+  margin: 2%
+}
+
+section.faq {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+h2.faq {
+  margin: 0%;
+  padding: 2%;
+  text-align: left;
+}
+
 
 table {
   border-collapse: collapse;
@@ -270,7 +366,7 @@ form button:hover {
   left: 0;
   width: 300px;
   padding: 1em;
-  background: white;
+  background: rgb(216, 239, 248);
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
   border-radius: 8px;
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -288,34 +384,6 @@ form button:hover {
   opacity: 1;
 }
 
-nav {
-  width: 100%;                                                                    /* Ensure nav takes full width */
-  text-align: center;                                                             /* Center the navigation links */
-  font-family: var(--Franky);
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;                                                        /* Center the links horizontally */
-  flex-wrap: wrap;                                                                /* Allow wrapping for smaller screens */
-}
-
-nav ul li {
-  margin: 10px 20px;                                                              /* Space between each link */
-}
-
-nav a {
-  color: rgb(127, 245, 214);
-  text-decoration: none;
-  font-size: 18px;
-}
-
-nav a:hover {
-  color: rgb(0, 85, 255);
-}
-
 a {
   text-decoration: none;
   color:rgb(127, 245, 214);
@@ -331,29 +399,29 @@ table {
   margin-right: auto;
 }
 
-footer {
-  font-family: var(--Franky);
-  font-size: 18px;
-  color:rgb(127, 245, 214);
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  padding: 10px;
-  margin-top: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-start;  
-  align-items: center;        
+footer.foot-nav {
+  width: 90%;
+  margin: 2%;
+  background-color: rgb(178, 235, 255, 0.7);                                                               /* | Vertical seperators */
 }
 
-footer a {
+aside.socials {
+  padding-bottom: 2%;
+  display: flex;
+  justify-content: center; 
+  gap: .3%;
+  font-family: var(--Franky); 
+  font-size: 15px;
+  color: black;                                                                 /* | Vertical seperators */
+}
+
+aside a {
   text-decoration: none; 
-  color: rgb(127, 245, 214);
+  color: black;
   font-weight: bold;
   transition: color 0.3s ease; 
 }
 
-footer a:hover {
+aside a:hover {
   color: rgb(0, 85, 255);
 }
