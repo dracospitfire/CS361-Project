@@ -125,10 +125,12 @@ function HomePage() {
           </Link>
         </div>
         <h1>Pokémon Professor</h1>
-        <h2>Welcome to the Pokémon Professor Simulator</h2>
-        <p className="welcome">
+        <section className="welcome">
+        <h2 className="welcome">Welcome to the Pokémon Professor Simulator</h2>
+        <p>
           You’re stepping into the lab as a Pokémon Professor. Your mission? To study Pokémon in the lab, document traits, log trainer submissions, and build the most detailed Pokédex the world has ever seen. Each day, you’ll receive one unique Pokémon, provided by trainers out in the field who are impacted by factors like location, time of day, and weather conditions. Each Pokémon is your research subject and will give you an opportunity to analyze, record, and share findings with the global professor network.
         </p>
+        </section>
         <section className="options">
           <button className="signup" id="open-signup" onClick={() => setShowSignup(true)}>Signup</button>
           <button className="login" onClick={() => navigate("/startgame")}>Login</button>
