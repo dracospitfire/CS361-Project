@@ -7,6 +7,7 @@ import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { Character } from "./Professor";
 import { Html } from "@react-three/drei";
+import { useMemo } from "react";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -29,7 +30,7 @@ const lerpAngle = (start, end, t) => {
   return normalizeAngle(start + (end - start) * t);
 };
 
-export const CharacterController = () => {
+export const CharacterController = ({ chestRef, onChestOpen }) => {
   const [hasFallen, setHasFallen] = useState(false);
   const { WALK_SPEED, RUN_SPEED, JUMP_FORCE, ROTATION_SPEED } = useControls(
     "Character Control",
@@ -50,6 +51,7 @@ export const CharacterController = () => {
   const container = useRef();
   const character = useRef();
 
+  const [isNearChest, setIsNearChest] = useState(false);
   const [animation, setAnimation] = useState("idle");
   const [falling, setFalling] = useState(false);
 
@@ -62,6 +64,19 @@ export const CharacterController = () => {
   const cameraLookAt = useRef(new Vector3());
   const [, get] = useKeyboardControls();
   const isClicking = useRef(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (isNearChest && e.key.toLowerCase() === "r") {
+        if (onChestOpen) {
+          onChestOpen();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isNearChest, onChestOpen]);
 
   useEffect(() => {
     const onMouseDown = (e) => {
@@ -93,7 +108,7 @@ export const CharacterController = () => {
 
   }, []);
 
-  const FALL_THRESHOLD = -7;
+  const FALL_THRESHOLD = useMemo(() => -7, []);
   const rotationLerpSpeed = falling ? 0.01 : 0.1;
   const cameraLerpSpeed = falling ? 0.01 : 0.1;
 
@@ -186,6 +201,17 @@ export const CharacterController = () => {
       rb.current.setLinvel(vel, true);
     }
 
+    if (chestRef.current && rb.current) {
+      const chestPos = chestRef.current.position;
+      const playerPos = rb.current.translation();
+      const dx = chestPos.x - playerPos.x;
+      const dy = chestPos.y - playerPos.y;
+      const dz = chestPos.z - playerPos.z;
+      const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+    
+      setIsNearChest(distance < .6);
+    }
+
     // CAMERA
     container.current.rotation.y = MathUtils.lerp(
       container.current.rotation.y,
@@ -214,17 +240,15 @@ export const CharacterController = () => {
         <group ref={cameraTarget} position-y={1} position-z={-0}>
           {hasFallen && (
             <Html center>
-              <div
-                style={{
-                  background: "rgba(192, 0, 0, 0.7)",
-                  color: "white",
-                  padding: "10px 20px",
-                  borderRadius: "10px",
-                  fontSize: "1.2rem",
-                  textAlign: "center",
-                }}
-              >
+              <div className="fallen">
                 Respawned... You have fallen! 
+              </div>
+            </Html>
+          )}
+          {isNearChest && (
+            <Html center>
+              <div className="open-chest">
+              Recieve Pokémon<br />Press [R]
               </div>
             </Html>
           )}

@@ -1,7 +1,7 @@
 import { Environment, OrthographicCamera } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { useControls } from "leva";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { CharacterController } from "../Character/CharacterController";
 import { Map } from "./Map";
 import { Chest } from '../Objects/Chest';
@@ -43,6 +43,18 @@ const maps = {
 export const Experience = () => {
 
   const shadowCameraRef = useRef();
+  const chestRef = useRef();
+
+  const [chestOpened, setChestOpened] = useState(false);
+
+
+  const handleChestOpen = () => {
+    if (!chestOpened) {
+      setChestOpened(true);
+      console.log("✨ Chest opened!");
+    }
+  };
+
   const { map } = useControls("Map", {
     map: {
       value: "city_scene_tokyo",        // default selected map
@@ -76,8 +88,13 @@ export const Experience = () => {
           position={maps[map].position}
           model={maps[map].model}
         />
-        <CharacterController />
-        <Chest position={[0, -.9, -2]} scale={0.15} />
+        <CharacterController
+          chestRef={chestRef}
+          onChestOpen={handleChestOpen}
+        />
+        <group ref={chestRef} position={[0, -0.9, -2]} scale={0.15}>
+          <Chest opened={chestOpened} />
+        </group>
       </Physics>
     </>
   );
