@@ -9,6 +9,8 @@ import { Character } from "./Professor";
 import { Html } from "@react-three/drei";
 import { useMemo } from "react";
 
+import Pikachu from "../../assets/Images/pokemon/Pikachu.png"
+
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
   while (angle < -Math.PI) angle += 2 * Math.PI;
@@ -31,7 +33,6 @@ const lerpAngle = (start, end, t) => {
 };
 
 export const CharacterController = ({ chestRef, onChestOpen }) => {
-  const [hasFallen, setHasFallen] = useState(false);
   const { WALK_SPEED, RUN_SPEED, JUMP_FORCE, ROTATION_SPEED } = useControls(
     "Character Control",
     {
@@ -54,6 +55,8 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
   const [isNearChest, setIsNearChest] = useState(false);
   const [animation, setAnimation] = useState("idle");
   const [falling, setFalling] = useState(false);
+  const [hasFallen, setHasFallen] = useState(false);
+  const [chestOpened, setChestOpened] = useState(false); 
 
   const characterRotationTarget = useRef(Math.PI);
   const rotationTarget = useRef(0);
@@ -67,8 +70,9 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (isNearChest && e.key.toLowerCase() === "r") {
+      if (isNearChest && e.key.toLowerCase() === "r" && !chestOpened) {
         if (onChestOpen) {
+          setChestOpened(true);
           onChestOpen();
         }
       }
@@ -154,7 +158,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
       let speed = get().run ? RUN_SPEED : WALK_SPEED;
 
       if (isClicking.current) {
-        console.log("clicking", mouse.x, mouse.y);
+        //console.log("clicking", mouse.x, mouse.y);
         if (Math.abs(mouse.x) > 0.1) {
           movement.x = -mouse.x;
         }
@@ -247,8 +251,17 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
           )}
           {isNearChest && (
             <Html center>
-              <div className="open-chest">
-              Recieve Pokémon<br />Press [R]
+              <div className={chestOpened ? "pokemon-reward" : "open-chest"}>
+                {chestOpened ? (
+                  <>
+                    <h2>You recieved, Pikachu!</h2>
+                    <img src={Pikachu} alt="Pikachu" width={100} height={100}/>
+                  </>
+                ) : (
+                  <>
+                    Receive Pokémon<br />Press [R]
+                  </>
+                )}
               </div>
             </Html>
           )}
