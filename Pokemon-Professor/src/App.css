@@ -116,16 +116,21 @@ body.newspage {
 
 header.head-nav {
   width: 90%;
-  margin: 2%; 
+  margin: 2%;
+  background-color: rgb(178, 235, 255, 0.7);   
+  border: 1px solid black; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;                                                          
 }
 
-div.logo {
-  background-color: white;
+header.head-nav .logo {
+  display: flex;
+  align-items: center;
 }
 
 nav.internal-nav {
   padding: 2%;
-  background-color: rgb(178, 235, 255, 0.7);
   display: flex;
   justify-content: right; 
   align-items: center; 
@@ -133,7 +138,6 @@ nav.internal-nav {
   font-family: var(--Franky); 
   font-size: 25px;
   color: black;                                                                 /* | Vertical seperators */
-  border: 1px solid black;
 }
 
 nav.external-nav {
@@ -228,7 +232,20 @@ main {
   overflow: hidden;                                                               
 }
 
-h1, h2 {
+h1 {
+  margin: 2%;
+  margin-top: 4%;
+  font-family: 'Bangers';
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(0, 0, 148);
+  text-shadow: 2px 2px 4px yellow;
+  font-weight: bold;
+  font-size: 80px;
+}
+
+h2 {
   margin: 0%;
   padding: 0%;
   color: black;
@@ -315,6 +332,19 @@ section.options button.login {
   border-radius: 0;
 }
 
+section.options button.updates {
+  margin: 1% 1% 1% 0%;
+  width: 100%;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgb(0, 85, 255, 0.85);
+  color: rgb(255, 255, 255);
+  font-size: 125%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+}
+
 button.signup {
   margin: 2%;
 }
@@ -324,7 +354,33 @@ button.login {
 }
 
 section.faq {
-  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  background-color: rgba(252, 255, 59, 0.5);
+}
+
+section.faq button {
+  margin: 0%;
+  margin-right: 2%;
+}
+
+article.faq-header {
+  width: 100%;
+  margin: 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+article.faq-QA {
+  margin: 0%;
+  width: 90%;
+  padding-left: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h2.faq {
@@ -333,6 +389,11 @@ h2.faq {
   text-align: left;
 }
 
+.faq-items {   
+  width: 100%;            
+  padding: 2%;
+  box-sizing: border-box;
+}
 
 table {
   border-collapse: collapse;
@@ -394,7 +455,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;                                                            /* Centers the form elements */
-  max-width: 500px;                                                               
+  max-width: 350px;                                                               
   margin: 0 auto;
 }
 
@@ -425,64 +486,10 @@ form select {
 }
 
 form label {
-  color: rgb(56, 121, 252);
+  color: rgb(0, 85, 255);
   width: 60%;                                                                     /* Ensures labels are the same width */
   text-align: right;                                                              /* Aligns label text to the right */
   margin-right: 10px;
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.confirmation {
-  padding: 2%;
-  width: 400px;
-  height: 150px;
-  background: rgb(255, 255, 255);
-  border-radius: 15px;
-  border: 2px solid navy;
-  text-align: center;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.stay {
-  margin: 0%;
-  margin-top: 3%;
-  margin-right: 15%;
-  padding: 3% 7%;
-  background-color: #ccc;
-  border: none;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.exit {
-  margin: 0%;
-  margin-top: 3%;
-  padding: 3% 7%;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 form input {
@@ -500,18 +507,46 @@ form button {
 }
 
 form button:hover {
-  background-color: rgb(217, 115, 251);                                           
+  background-color: rgb(0, 255, 187);                                           
+}
+
+.signup-shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.signup-shadow.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.signup-shadow.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .signup-slide {
   position: fixed;
-  top: 10%;
+  top: 20%;
   left: 0;
-  width: 300px;
-  padding: 1em;
+  width: 400px;
+  padding-left: 0%;
+  padding-top: 2%;
+  padding-right: 2%;
+  padding-bottom: 0%;
+  border: 2px solid navy;
   background: rgb(216, 239, 248);
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  border-radius: 8px;
+  border-radius: 0 15px 15px 0;
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -546,6 +581,74 @@ footer.foot-nav {
   margin: 2%;
   background-color: rgb(178, 235, 255, 0.7);   
   border: 1px solid black;                                                           
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: opacity 0.5s ease-in-out;
+}
+
+article.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.confirmation {
+  padding: 2%;
+  width: 400px;
+  height: 150px;
+  background: rgb(255, 255, 255);
+  border-radius: 15px;
+  border: 2px solid navy;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stay {
+  margin: 0%;
+  margin-top: 3%;
+  margin-right: 15%;
+  padding: 3% 7%;
+  background-color: #ccc;
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.exit {
+  margin: 0%;
+  margin-top: 3%;
+  padding: 3% 7%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 aside.socials {

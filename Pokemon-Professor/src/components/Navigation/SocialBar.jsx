@@ -46,7 +46,7 @@ const SocialBar = () => {
       </aside>
       </footer>
       {showPopup && (
-        <div className="background">
+        <article className="background">
           <div className="confirmation">
             <p><strong>You are about to navigate to another site.</strong></p>
             <p>Are sure you want to leave this website without signing up?</p>
@@ -55,7 +55,7 @@ const SocialBar = () => {
               <button onClick={confirmExit} className="exit">Exit</button>
             </section>
           </div>
-        </div>
+        </article>
       )}
     </>
   );
