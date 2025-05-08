@@ -503,9 +503,22 @@ section.options button.password {
   border-radius: 0;
 }
 
-section.options button, input {
+section.options input {
   margin: 1% 0% 1% 1%;
   width: 400px;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 150%;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+section.options button {
+  margin: 1% 0% 1% 1%;
+  width: 100%;
   height: 90px;
   border: 1px solid black;
   background-color: rgba(255, 255, 255, 0.85);
