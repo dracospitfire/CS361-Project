@@ -1,17 +1,19 @@
 import CSSwrapper from "../components/CSSwrapper";
-import { useNavigate } from "react-router-dom";
 import PokeballThrow from "../animations/PokeballThrow";
-import Navbar from "../components/Navigation/NavBar";
+import NavBar from "../components/Navigation/NavBar";
+import SocialBar from "../components/Navigation/SocialBar";
 
 function NewsPage() {
-  const navigate = useNavigate();
   
   return (
     <>
       <CSSwrapper className="newspage" />
       <PokeballThrow />
-      <Navbar />
-      <button onClick={() => navigate("/homepage")}>Home</button>
+      <NavBar />
+      <main>
+        <h1>News & Updates</h1>
+      </main>
+      <SocialBar />
     </>
   );
 }

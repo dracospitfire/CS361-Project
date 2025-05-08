@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
 import { useControls } from "leva";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { Character } from "./Professor";
@@ -33,6 +34,8 @@ const lerpAngle = (start, end, t) => {
 };
 
 export const CharacterController = ({ chestRef, onChestOpen }) => {
+  const navigate = useNavigate();
+
   const { WALK_SPEED, RUN_SPEED, JUMP_FORCE, ROTATION_SPEED } = useControls(
     "Character Control",
     {
@@ -253,10 +256,22 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
             <Html center>
               <div className={chestOpened ? "pokemon-reward" : "open-chest"}>
                 {chestOpened ? (
-                  <>
+                  <div className="pokemon-stats">
                     <h2>You recieved, Pikachu!</h2>
-                    <img src={Pikachu} alt="Pikachu" width={100} height={100}/>
-                  </>
+                    <button onClick={() => navigate('/')} className="pokemon-button">
+                      <img src={Pikachu} alt="Pikachu" width={100} height={100} />
+                    </button>
+                    <br></br><strong>Trainer: </strong>Ash Katchum
+                    <ul>
+                      <li><strong>Type:</strong> Electric</li>
+                      <li><strong>HP:</strong> 35</li>
+                      <li><strong>Attack:</strong> 55</li>
+                      <li><strong>Defense:</strong> 40</li>
+                      <li><strong>Speed:</strong> 90</li>
+                      <li><strong>Special Attack:</strong> 50</li>
+                      <li><strong>Special Defense:</strong> 50</li>
+                    </ul>
+                    </div>
                 ) : (
                   <>
                     Receive Pokémon<br />Press [R]

@@ -28,16 +28,16 @@ const NavBar = () => {
     <header className="head-nav">
       <div className="logo">
         <Link to="/" className="rest-tool" onClick={resetDatabase}>
-          <img src="./pokecenter.png" alt="PokeCyberpunk City Logo" width="50" height="55"/>
+          <img src="./PP-logo.png" alt="PokeCyberpunk City Logo" width="50" height="55"/>
           <span className="rest-tool-text">Reset Database</span>
         </Link>
       </div>
       <nav className="internal-nav">
-        <Link to="/homepage">Home</Link>
+        <Link to="/">Home</Link>
         |
-        <Link to="/useraccount">Account</Link>
+        <Link to="/login">Account</Link>
         |
-        <Link to="/startgame">Game</Link>
+        <Link to="/login">Game</Link>
         |
         <Link to="/gamenews">News</Link>
         |

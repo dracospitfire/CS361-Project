@@ -6,7 +6,7 @@ export const SignOutControls = () => {
 
   useControls("Exit", {
     "Sign Out": button(() => {
-      navigate("/homepage");
+      navigate("/");
     }),
     AutoSave: {
       options: ["On", "Off"],

@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PokeballThrow from "../animations/PokeballThrow";
 import NavBar from "../components/Navigation/NavBar";
-import FormSignUp from "../components/Signup/SignupForm";
+import NewsUpdates from "../components/Updates/NewsUpdates";
 import SocialBar from "../components/Navigation/SocialBar";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [showSignup, setShowSignup] = useState(false);
-  const [showFAQ, setShowFAQ] = useState(false);
+  const [showUpdates, setShowUpdates] = useState(false);
+  
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -17,17 +19,34 @@ function LoginPage() {
       <PokeballThrow />
       <NavBar />
       <main>
+        <h1>Pokémon Professor</h1>
+        <button className="updates" onClick={() => setShowUpdates(true)}>Updates</button>
         <section className="options">
-          <button className="login" onClick={() => navigate("/login")}>Login</button>
-          <button className="updates" onClick={() => setShowNews(true)}>Updates</button>
+          <button className="username">Username:</button>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="text"
+          />
         </section>
-        {/* {showSignup && (
-          <article className="background"> */}
-            <div id="signup-form" className={`signup-slide ${showSignup ? "visible" : "hidden"}`}>
-              <FormSignUp cancelForm={() => setShowSignup(false)} />
-            </div>
-          {/* </article>
-        )} */}
+        <section className="options">
+          <button className="password" onClick={() => navigate("/startgame")}>Password:</button>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="text"
+          />
+        </section>
+        <button className="login" onClick={() => navigate("/startgame")}>Login</button>
+        <article className={`shadow ${showUpdates ? "visible" : "hidden"}`}>
+          <div className={`updates-slide ${showUpdates ? "visible" : "hidden"}`}>
+            <NewsUpdates cancelForm={() => setShowUpdates(false)} />
+          </div>
+        </article>
       </main>
       <SocialBar />
     </>

@@ -1,8 +1,7 @@
 import CSSwrapper from "../components/CSSwrapper";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PokeballThrow from "../animations/PokeballThrow";
-import axios from "axios";
 import NavBar from "../components/Navigation/NavBar";
 import FormSignUp from "../components/Signup/SignupForm";
 import SocialBar from "../components/Navigation/SocialBar";
@@ -29,7 +28,7 @@ function HomePage() {
           <button className="signup" id="open-signup" onClick={() => setShowSignup(true)}>Signup</button>
           <button className="login" onClick={() => navigate("/login")}>Login</button>
         </section>
-        <article className={`signup-shadow ${showSignup ? "visible" : "hidden"}`}>
+        <article className={`shadow ${showSignup ? "visible" : "hidden"}`}>
           <div className={`signup-slide ${showSignup ? "visible" : "hidden"}`}>
             <FormSignUp cancelForm={() => setShowSignup(false)} />
           </div>

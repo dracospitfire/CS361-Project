@@ -1,20 +1,19 @@
 import CSSwrapper from "../components/CSSwrapper";
 import PokeballThrow from "../animations/PokeballThrow";
 import NavBar from "../components/Navigation/NavBar";
+import SocialBar from "../components/Navigation/SocialBar";
 
-function AccountPage() {
+function MapsPage() {
   
   return (
     <>
-      <CSSwrapper className="accountpage" />
+      <CSSwrapper className="mapspage" />
       <PokeballThrow />
       <NavBar />
-      <main>
-        <h1>User Profile</h1>
+      <main className="map">
       </main>
-      <SocialBar />
     </>
   );
 }
 
-export default AccountPage;
+export default MapsPage;

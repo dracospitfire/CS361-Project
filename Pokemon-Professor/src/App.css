@@ -5,18 +5,54 @@ html {
 
 body.accountpage {
   margin: 0%;
-  background-color: black;
-  background-size: 20% auto;
-  background-position: 90% 40%;
-  background-repeat: no-repeat; 
+  padding: 0%;
+  width: auto;
+  height: 100%;
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body.accountpage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('./assets/Images/background/Pokemon Lab.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(4px);
+  z-index: -1;
 }
 
 body.blogpage {
   margin: 0%;
-  background-color: black;
-  background-size: 20% auto;
-  background-position: 90% 40%;
-  background-repeat: no-repeat; 
+  padding: 0%;
+  width: auto;
+  height: 100%;
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body.blogpage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('./assets/Images/background/Pokemon Lab.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(4px);
+  z-index: -1;
 }
 
 body.startgame {
@@ -27,6 +63,32 @@ body.startgame {
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
+}
+
+body.mapspage {
+  margin: 0%;
+  margin-top: 0%;
+  padding: 0%;
+  width: 100%;
+  height: 100%;
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: fixed;
+  z-index: 0;
+}
+
+body.mapspage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('./assets/Images/maps/Pikachu-Map.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -1;
 }
 
 div.fallen {
@@ -57,7 +119,7 @@ div.open-chest {
 
 div.pokemon-reward {
   margin: 0%;
-  width: 170px; 
+  width: 180px; 
   height: 170px;
   background: rgba(255, 255, 255, 0.75);
   color: rgb(0, 0, 0);
@@ -70,6 +132,27 @@ div.pokemon-reward {
   align-items: center;        
   text-align: center;       
   white-space: normal; 
+}
+
+.pokemon-stats {
+  margin: 2%;
+  width: auto;
+  height: 170px;  
+  padding: 0%;           
+  overflow-y: auto;
+}
+
+.pokemon-stats ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 3%;
+}
+
+.pokemon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 body.homepage {
@@ -100,10 +183,28 @@ body.homepage::before {
 
 body.newspage {
   margin: 0%;
-  background-color: black;
-  background-size: 20% auto;
-  background-position: 90% 40%;
-  background-repeat: no-repeat; 
+  padding: 0%;
+  width: auto;
+  height: 100%;
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body.newspage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/Images/background/Pokemon Lab.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(4px);
+  z-index: -1;
 }
 
 
@@ -125,6 +226,7 @@ header.head-nav {
 }
 
 header.head-nav .logo {
+  padding-left: 1.5%;
   display: flex;
   align-items: center;
 }
@@ -176,6 +278,10 @@ nav a:hover {
 main {
   width: 90%;
   justify-items: center;
+}
+
+main.map {
+  height: 450px;
 }
 
 .rest-tool {
@@ -308,7 +414,7 @@ section.options {
 
 section.options button.signup {
   margin: 1% 1% 1% 0%;
-  width: 100%;
+  width: 300px;
   height: 90px;
   border: 1px solid black;
   background-color: rgb(0, 85, 255, 0.85);
@@ -321,7 +427,20 @@ section.options button.signup {
 
 section.options button.login {
   margin: 1% 0% 1% 1%;
-  width: 100%;
+  width: 300px;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgb(0, 255, 187, 0.85);
+  color: rgb(0, 0, 0);
+  font-size: 125%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+button.login {
+  margin: 1% 0% 1% 1%;
+  width: 300px;
   height: 90px;
   border: 1px solid black;
   background-color: rgb(0, 255, 187, 0.85);
@@ -341,6 +460,58 @@ section.options button.updates {
   color: rgb(255, 255, 255);
   font-size: 125%;
   font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+button.updates {
+  margin: 1% 1% 1% 0%;
+  width: 300px;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgb(0, 85, 255, 0.85);
+  color: rgb(255, 255, 255);
+  font-size: 125%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+section.options button.username {
+  margin: 1% 0% 1% 1%;
+  width: 400px;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgba(178, 235, 255, 0.85);
+  color: rgb(0, 0, 0);
+  font-size: 125%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+section.options button.password {
+  margin: 1% 0% 1% 1%;
+  width: 400px;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgb(178, 235, 255, 0.85);
+  color: rgb(0, 0, 0);
+  font-size: 125%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+section.options button, input {
+  margin: 1% 0% 1% 1%;
+  width: 400px;
+  height: 90px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 150%;
   cursor: pointer;
   border-radius: 0;
 }
@@ -510,7 +681,26 @@ form button:hover {
   background-color: rgb(0, 255, 187);                                           
 }
 
-.signup-shadow {
+section.updates {
+  padding: 2%;
+  border-radius: 10px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul.updates {
+  list-style-type: none;
+  padding-left: 7%;
+  margin: 4% 0;
+}
+
+ul.updates li {
+  margin-bottom: 3%;
+}
+
+.shadow {
   position: fixed;
   top: 0;
   left: 0;
@@ -524,12 +714,12 @@ form button:hover {
   transition: opacity 0.5s ease-in-out;
 }
 
-.signup-shadow.hidden {
+.shadow.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.signup-shadow.visible {
+.shadow.visible {
   opacity: 1;
   pointer-events: auto;
 }
@@ -557,6 +747,33 @@ form button:hover {
 }
 
 .signup-slide.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.updates-slide {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  width: 400px;
+  padding-left: 0%;
+  padding-top: 2%;
+  padding-right: 2%;
+  padding-bottom: 0%;
+  border: 2px solid navy;
+  background: rgb(216, 239, 248);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  border-radius: 15px 0 0 15px;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.updates-slide.hidden {
+  transform: translateX(120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.updates-slide.visible {
   transform: translateX(0);
   opacity: 1;
 }
