@@ -258,7 +258,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
                 {chestOpened ? (
                   <div className="pokemon-stats">
                     <h2>You recieved, Pikachu!</h2>
-                    <button onClick={() => navigate('/')} className="pokemon-button">
+                    <button onClick={() => navigate('/maps')} className="pokemon-button">
                       <img src={Pikachu} alt="Pikachu" width={100} height={100} />
                     </button>
                     <br></br><strong>Trainer: </strong>Ash Katchum
