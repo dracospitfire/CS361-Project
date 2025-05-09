@@ -50,8 +50,8 @@ const PokeballThrow = () => {
       if (event.target.tagName === "A") {
         const newPokeball = {
           id: time.now(),
-          x: event.clientX - window.innerWidth / 2,   
-          // Adjust to center Pokeball  
+            // Adjust to center Pokeball  
+          x: event.clientX - 20,
           y: event.clientY - 20,              
           image: POKEBALLS[Math.floor(Math.random() * POKEBALLS.length)],
         };
@@ -74,9 +74,12 @@ const PokeballThrow = () => {
       {pokeballs.map((pokeball) => (
         <motion.div key={pokeball.id} className="animated-pokeball"
         initial={{ x: pokeball.x, y: pokeball.y, opacity: 1, rotate: 0 }}
-        animate={{ y: window.outerHeight, opacity: 0, rotate: -720 }}
+        animate={{ y: window.outerHeight, opacity: 0, rotate: 0 }}
         transition={{ duration: 2, ease: "easeIn" }} >
-        <img src={pokeball.image} alt="PokeBall" className="pokeball-image" />
+        <motion.img src={pokeball.image} alt="PokeBall" className="pokeball-image"
+          initial={{ rotate: 0 }}
+          animate={{ rotate: -720 }}
+          transition={{ duration: 2, ease: "easeIn" }} />
       </motion.div>
       ))}
     </div>,

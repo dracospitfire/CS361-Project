@@ -32,7 +32,7 @@ function LoginPage() {
           />
         </section>
         <section className="options">
-          <button className="password" onClick={() => navigate("/startgame")}>Password:</button>
+          <button className="password" nClick={() => setShowUpdates(true)}>Password:</button>
           <input
             id="password"
             type="password"

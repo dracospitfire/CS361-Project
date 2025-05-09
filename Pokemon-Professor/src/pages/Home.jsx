@@ -1,7 +1,6 @@
 import CSSwrapper from "../components/CSSwrapper";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import PokeballThrow from "../animations/PokeballThrow";
 import NavBar from "../components/Navigation/NavBar";
 import FormSignUp from "../components/Signup/SignupForm";
 import SocialBar from "../components/Navigation/SocialBar";
@@ -14,7 +13,6 @@ function HomePage() {
   return (
     <>
       <CSSwrapper className="homepage" />
-      <PokeballThrow />
       <NavBar />
       <main>
         <h1>Pokémon Professor</h1>

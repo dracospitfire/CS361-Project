@@ -51,8 +51,8 @@ const SocialBar = () => {
             <p><strong>You are about to navigate to another site.</strong></p>
             <p>Are sure you want to leave this website without signing up?</p>
             <section className="options">
-              <button onClick={cancelExit} className="stay">Stay</button>
               <button onClick={confirmExit} className="exit">Exit</button>
+              <button onClick={cancelExit} className="stay">Stay</button>
             </section>
           </div>
         </article>

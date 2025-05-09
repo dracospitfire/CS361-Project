@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PokeballThrow from "../animations/PokeballThrow";
 
 function cssWrapper({ className }) {
   useEffect(() => {
@@ -12,7 +13,12 @@ function cssWrapper({ className }) {
     };
   }, [className]);
 
-  return null; 
+  return (
+    <>
+
+    </>
+  );
+      
 }
 
 export default cssWrapper;
