@@ -552,6 +552,7 @@ article.faq-QA {
   margin: 0%;
   width: 90%;
   padding-left: 2%;
+  background-color: rgba(254, 254, 226, 0.55);
   display: flex;
   flex-direction: column;
   align-items: center;

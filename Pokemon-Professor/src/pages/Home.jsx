@@ -1,6 +1,7 @@
 import CSSwrapper from "../components/CSSwrapper";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import PokeballThrow from "../animations/PokeballThrow";
 import NavBar from "../components/Navigation/NavBar";
 import FormSignUp from "../components/Signup/SignupForm";
 import SocialBar from "../components/Navigation/SocialBar";
@@ -13,6 +14,7 @@ function HomePage() {
   return (
     <>
       <CSSwrapper className="homepage" />
+      <PokeballThrow />
       <NavBar />
       <main>
         <h1>Pokémon Professor</h1>
@@ -43,11 +45,11 @@ function HomePage() {
             {showFAQ && (
               <div className="faq-items">
                 <strong>Q. What is the Pokémon Professor Game?</strong>
-                <p>It's a strategy and research-based game where you play as a Pokémon Professor discovering, cataloging, and studying Pokémon in various regions.</p>
+                <p><strong> A. </strong> It's a strategy and research-based game where you play as a Pokémon Professor discovering, cataloging, and studying Pokémon in various regions.</p>
                 <strong>Q. What kind of research can I conduct?</strong>
-                <p><strong>A.</strong> You can study Pokémon habitats, evolutions, genetic traits, and even cross-regional variants.</p>
+                <p><strong> A. </strong> You can study Pokémon habitats, evolutions, genetic traits, and even cross-regional variants.</p>
                 <strong>Q. Is there a leveling system?</strong>
-                <p><strong>A.</strong> Yes, your professor rank increases as you publish to the Pokédex, complete Pokémon research, and catalog each Pokémon received.</p>
+                <p><strong> A. </strong> Yes, your professor rank increases as you publish to the Pokédex, complete Pokémon research, and catalog each Pokémon received.</p>
               </div>
             )}
           </article>
