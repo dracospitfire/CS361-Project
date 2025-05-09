@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from "react";
 
 import Professor from '../../assets/Models/character.glb';
 
+useGLTF.preload(Professor);
+
 export function Character({ animation, ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(Professor);

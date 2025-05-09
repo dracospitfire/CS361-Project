@@ -1,6 +1,8 @@
 import { RigidBody, CuboidCollider } from "@react-three/rapier";
 import { useGLTF } from "@react-three/drei";
-import chestModel from '../../assets/Models/chest.glb';
+import chestModel from "../../assets/Models/chest.glb";
+
+useGLTF.preload(chestModel);
 
 export const Chest = ({ position = [0, 0, 0], scale = 1, ...props }) => {
   const { scene } = useGLTF(chestModel);
