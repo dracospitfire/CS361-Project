@@ -323,11 +323,11 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
         </group>
           <group ref={cameraPosition} position-y={2} position-z={4} />
           <group ref={character} position-y={-.2} >
-            <ProfessorOak scale={0.017} />
-            <Marshmallow scale={0.15} position-x={-.18} position-z={.2} animation={animation} />
+            <Marshmallow scale={0.15} position-x={.18} position-z={-.2} animation={animation} />
+            <ProfessorOak scale={0.017} position-x={0} position-z={0} />
           </group>
+          <CapsuleCollider args={[0.08, 0.15]} />
         </group>
-        <CapsuleCollider args={[0.08, 0.15]} />
       </RigidBody>
     </>
   );
