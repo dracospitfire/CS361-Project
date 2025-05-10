@@ -103,7 +103,7 @@ div.fallen {
 div.open-chest {
   margin: 0%;
   width: 170px; 
-  height: 100px;
+  height: 200px;
   background: rgba(0, 0, 0, 0.75);
   color: white;
   padding: 0%;
@@ -120,7 +120,7 @@ div.open-chest {
 div.pokemon-reward {
   margin: 0%;
   width: 180px; 
-  height: 170px;
+  height: 180px;
   background: rgba(255, 255, 255, 0.75);
   color: rgb(0, 0, 0);
   padding: 0%;
@@ -138,14 +138,16 @@ div.pokemon-reward {
   margin: 2%;
   width: auto;
   height: 170px;  
-  padding: 0%;           
+  padding: 0%;   
   overflow-y: auto;
 }
 
 .pokemon-stats ul {
   list-style-type: none;
-  margin: 0;
-  padding: 3%;
+  margin: 0%;
+  padding: 0%;
+  padding-top: 4%;
+  padding-bottom: 1%;
 }
 
 .pokemon-button {

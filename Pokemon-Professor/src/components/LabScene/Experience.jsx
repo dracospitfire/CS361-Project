@@ -2,10 +2,9 @@ import { Environment, OrthographicCamera } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { useControls } from "leva";
 import { useRef, useState } from "react";
-import { CharacterController } from "../Character/CharacterController";
+import { CharacterController } from "../Controller/CharacterController";
 import { Map } from "./Map";
 import { Chest } from "../Objects/Chest";
-import { Oak } from "../Objects/Professor";
 
 import citySceneTokyoModel from '../../assets/Models/city_scene_tokyo.glb';
 import medievalFantasyBookModel from '../../assets/Models/medieval_fantasy_book.glb';
@@ -96,7 +95,6 @@ export const Experience = () => {
         <group ref={chestRef} position={[0, -0.9, -2]} scale={0.15}>
           <Chest opened={chestOpened} />
         </group>
-        <Oak position={[0, -0.9, -4]} scale={0.02} />
       </Physics>
     </>
   );

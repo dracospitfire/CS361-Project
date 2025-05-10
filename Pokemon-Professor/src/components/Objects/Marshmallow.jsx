@@ -1,13 +1,13 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
 
-import Professor from '../../assets/Models/character.glb';
+import marshmallow from '../../assets/Models/character.glb';
 
-useGLTF.preload(Professor);
+useGLTF.preload(marshmallow);
 
-export function Character({ animation, ...props }) {
+export function Marshmallow({ animation, ...props }) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF(Professor);
+  const { nodes, materials, animations } = useGLTF(marshmallow);
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {

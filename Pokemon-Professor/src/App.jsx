@@ -8,7 +8,6 @@ import AccountPage from "./pages/Account";
 import NewsPage from "./pages/News";
 import BlogPage from "./pages/Blog";
 
-
 const App = () => {
   return (
     <>

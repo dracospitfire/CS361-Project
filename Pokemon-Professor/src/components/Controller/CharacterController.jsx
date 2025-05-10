@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
-import { Character } from "./Professor";
+import { Marshmallow } from "../Objects/Marshmallow";
+import { ProfessorOak } from "../Objects/Professor";
 import { Html } from "@react-three/drei";
 import { useMemo } from "react";
 
@@ -41,7 +42,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
     {
       WALK_SPEED: { value: 0.8, min: 0.1, max: 4, step: 0.1 },
       RUN_SPEED: { value: 1.6, min: 0.2, max: 12, step: 0.1 },
-      JUMP_FORCE: { value: 10, min: 1, max: 20, step: 1 },
+      JUMP_FORCE: { value: 4, min: 1, max: 20, step: 1 },
       ROTATION_SPEED: {
         value: degToRad(0.5),
         min: degToRad(0.1),
@@ -55,6 +56,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
   const container = useRef();
   const character = useRef();
 
+  const [isGrounded, setIsGrounded] = useState(false);
   const [isNearChest, setIsNearChest] = useState(false);
   const [animation, setAnimation] = useState("idle");
   const [falling, setFalling] = useState(false);
@@ -64,6 +66,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
   const characterRotationTarget = useRef(Math.PI);
   const rotationTarget = useRef(0);
   const cameraTarget = useRef();
+  const lastTap = useRef(0);
   const cameraPosition = useRef();
   const cameraWorldPosition = useRef(new Vector3());
   const cameraLookAtWorldPosition = useRef(new Vector3());
@@ -71,6 +74,8 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
   const [, get] = useKeyboardControls();
   const isClicking = useRef(false);
 
+
+  //ChestOpening effects
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (isNearChest && e.key.toLowerCase() === "r" && !chestOpened) {
@@ -81,9 +86,34 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isNearChest, onChestOpen]);
+    const handleDoubleTap = () => {
+      const now = Date.now();
+      const doubleTap = now - lastTap.current;
+      if (isNearChest && doubleTap < 300 && !chestOpened) {
+        setChestOpened(true);
+        onChestOpen();
+        }
+        lastTap.current = now;
+      }
+
+    const handleDoubleClick = () => {
+      if (isNearChest && !chestOpened) {
+        setChestOpened(true);
+        onChestOpen();
+      }
+    };
+  
+    window.addEventListener("keydown", handleKeyDown);            // Keyboard Input
+    document.addEventListener("touchend", handleDoubleTap);       // Mobile Touch
+    document.addEventListener("dblclick", handleDoubleClick);     // Mouse Click
+  
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);        // Keyboard Input
+      document.removeEventListener("touchend", handleDoubleTap);   // Mobile Touch
+      document.removeEventListener("dblclick", handleDoubleClick); //Mouse Click
+    };
+
+  }, [isNearChest, onChestOpen, chestOpened]);
 
   useEffect(() => {
     const onMouseDown = (e) => {
@@ -123,6 +153,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
       setFalling(vel.y < -1);
+      setIsGrounded(Math.abs(vel.y) < 0.05);
 
       const pos = rb.current.translation();
       if (pos.y < FALL_THRESHOLD) {
@@ -205,6 +236,11 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
         rotationLerpSpeed
       );
 
+      if (get().jump && isGrounded) {
+        vel.y = JUMP_FORCE;
+        setAnimation("jump");
+      }
+
       rb.current.setLinvel(vel, true);
     }
 
@@ -254,7 +290,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
           )}
           {isNearChest && (
             <Html center>
-              <div className={chestOpened ? "pokemon-reward" : "open-chest"}>
+              <div className={chestOpened ? "pokemon-reward" : "open-chest"} >
                 {chestOpened ? (
                   <div className="pokemon-stats">
                     <h2>You recieved, Pikachu!</h2>
@@ -274,7 +310,11 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
                     </div>
                 ) : (
                   <>
-                    Receive Pokémon<br />Press [R]
+                    <div>Receive Pokémon</div>
+                    <br />
+                    <div>Press [R]</div>
+                    <div>or</div>
+                    <div>Double Tap</div>
                   </>
                 )}
               </div>
@@ -282,8 +322,9 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
           )}
         </group>
           <group ref={cameraPosition} position-y={2} position-z={4} />
-          <group ref={character} >
-            <Character scale={0.15} position-y={-0.15} animation={animation} />
+          <group ref={character} position-y={-.2} >
+            <ProfessorOak scale={0.017} />
+            <Marshmallow scale={0.15} position-x={-.18} position-z={.2} animation={animation} />
           </group>
         </group>
         <CapsuleCollider args={[0.08, 0.15]} />

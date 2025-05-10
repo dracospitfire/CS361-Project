@@ -15,23 +15,41 @@ const keyboardMap = [
   { name: "backward", keys: ["ArrowDown", "KeyS"] },
   { name: "left", keys: ["ArrowLeft", "KeyA"] },
   { name: "right", keys: ["ArrowRight", "KeyD"] },
-  { name: "run", keys: ["Shift"] },
-  { name: "jump", keys: ["Space", "KeyJ"]},
+  { name: "run", keys: ["ShiftLeft", "ShiftRight"]},
+  { name: "jump", keys: ["Space", "KeyJ"] },
 ];
 
 function Game() {
+  useEffect(() => {
+    const handleRightClick = (e) => {
+          // e.preventDefault();
+        };
 
-  // useEffect(() => {
-  //   const handleRightClick = (event) => {
-  //     event.preventDefault();
-  //   };
-
-  //   document.addEventListener("contextmenu", handleRightClick);
-
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleRightClick);
-  //   };
-  // }, []);
+    const preventZoom = (e) => {
+      if (e.ctrlKey || e.metaKey || (typeof e.scale !== "undefined" && e.scale !== 1)) {
+        e.preventDefault();
+      }
+    };
+  
+    const preventGesture = (e) => {
+      e.preventDefault();
+    };
+  
+    // Prevent gestures
+    window.addEventListener('wheel', preventZoom, { passive: false });
+    window.addEventListener('gesturestart', preventGesture);
+    window.addEventListener('gesturechange', preventGesture);
+    window.addEventListener('gestureend', preventGesture);
+    document.addEventListener("contextmenu", handleRightClick);
+  
+    return () => {
+      window.removeEventListener('wheel', preventZoom);
+      window.removeEventListener('gesturestart', preventGesture);
+      window.removeEventListener('gesturechange', preventGesture);
+      window.removeEventListener('gestureend', preventGesture);
+      document.removeEventListener("contextmenu", handleRightClick);
+    };
+  }, []);
 
   const { progress } = useProgress(); 
 
