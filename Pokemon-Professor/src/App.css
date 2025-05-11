@@ -1,4 +1,14 @@
+@font-face {
+  font-family: 'Bangers';
+  src: url('/FONT/Bangers/Bangers-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 #root {
+  --Franky: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --Bangers: 'Bangers';
+  
   margin: 0%;
   padding: 0%;
   height: 100%;
@@ -35,7 +45,7 @@ nav a:hover {
 h1 {
   margin: 2%;
   margin-top: 30px;
-  font-family: 'Bangers';
+  font-family: var(--Bangers);
   justify-content: center;
   align-items: center;
   text-align: center;

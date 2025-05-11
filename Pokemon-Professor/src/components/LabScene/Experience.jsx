@@ -64,7 +64,7 @@ export const Experience = () => {
 
   return (
     <>
-      <Environment preset="sunset" />
+      <Environment files="./HDRI/venice_sunset_1k.hdr" background />
       <directionalLight
         intensity={0.65}
         castShadow

@@ -1,12 +1,12 @@
 import { useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import professorOak from "../../assets/Models/pokemon_professor_oak_fixed.glb";
+import professorOak from "../../assets/Models/pokemon_professor_oak.glb";
 
-useGLTF.preload(professorOak);
+useGLTF.preload(professorOak)
 
 export const ProfessorOak = ({ position = [0, 0, 0], scale = 1, ...props }) => {
   const group = useRef();
-  const { scene } = useGLTF(professorOak);
+  const { scene } = useGLTF(professorOak)
   //NOTES: GLTF files contain the following options for future additons. 
     //scene,        The root THREE.Group containing the entire model
     //nodes,        For optional ictionary of nodes aka character section from the GLTF file

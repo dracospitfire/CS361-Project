@@ -1,13 +1,24 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
+import { useLoader } from '@react-three/fiber';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import marshmallow from '../../assets/Models/character.glb';
 
-useGLTF.preload(marshmallow);
+useGLTF.preload(marshmallow, false)
 
 export function Marshmallow({ animation, ...props }) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF(marshmallow);
+
+  const GLTF = useLoader(GLTFLoader, marshmallow, (loader) => {
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('/DRACO/');
+    loader.setDRACOLoader(dracoLoader);
+  });
+
+  const { nodes, materials, animations } = GLTF;
+
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
