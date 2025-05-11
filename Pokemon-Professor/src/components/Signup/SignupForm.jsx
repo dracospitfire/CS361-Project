@@ -1,3 +1,4 @@
+import "./SignupForm.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -96,7 +97,7 @@ const SignUp = ({ cancelForm }) => {
 
   return (
     <>
-      <h2>Signup</h2>
+      <h2 className="signup">Signup</h2>
       <form onSubmit={handleSubmit} autoComplete="off">
       <button type="button" onClick={cancelForm}>Cancel</button>
       <div>
@@ -291,12 +292,12 @@ const SignUp = ({ cancelForm }) => {
             placeholder="-1234"
           />
         </div>
-        <button type="submit" disabled={formData.password !== confirmPassword}>Submit</button>
         <div style={{ justifyContent: "center" }}>
         {confirmTouched && formData.password && confirmPassword && (formData.password !== confirmPassword) && (
           <p style={{ color: "red" }}>Yikes, passwords do not match.</p>
         )}
         </div>
+        <button type="submit" disabled={formData.password !== confirmPassword}>Submit</button>
       </form>
     </>
   ); 

@@ -1,3 +1,4 @@
+import "./Game.css";
 import CSSwrapper from "../components/CSSwrapper";
 import { Suspense } from "react";
 import { useState, useEffect } from "react";

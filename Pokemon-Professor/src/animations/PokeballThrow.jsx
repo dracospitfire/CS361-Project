@@ -1,3 +1,4 @@
+import "./PokeballThrow.css";
 import { useState, useEffect } from "react";
 import { motion, time } from "framer-motion";
 import { createPortal } from "react-dom";

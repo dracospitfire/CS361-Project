@@ -1,3 +1,4 @@
+import "./NewsUpdates.css";
 const Updates = ({ cancelForm }) => {
   
   const recentNews = {
@@ -13,7 +14,7 @@ const Updates = ({ cancelForm }) => {
 
   return (
     <section className="updates">
-      <h2>Recent Updates</h2>
+      <h2 className="recentnews">Recent Updates</h2>
       <ul className="updates">
         {Object.entries(recentNews).map(([title, detail], index) => (
           <li key={index}>

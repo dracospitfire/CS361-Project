@@ -1,3 +1,4 @@
+import "./Home.css";
 import CSSwrapper from "../components/CSSwrapper";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -5,6 +6,8 @@ import PokeballThrow from "../animations/PokeballThrow";
 import NavBar from "../components/Navigation/NavBar";
 import FormSignUp from "../components/Signup/SignupForm";
 import SocialBar from "../components/Navigation/SocialBar";
+
+
 
 function HomePage() {
   const navigate = useNavigate();
@@ -26,7 +29,7 @@ function HomePage() {
         </section>
         <section className="options">
           <button className="signup" id="open-signup" onClick={() => setShowSignup(true)}>Signup</button>
-          <button className="login" onClick={() => navigate("/login")}>Login</button>
+          <button className="login-nav" onClick={() => navigate("/login")}>Login</button>
         </section>
         <article className={`shadow ${showSignup ? "visible" : "hidden"}`}>
           <div className={`signup-slide ${showSignup ? "visible" : "hidden"}`}>

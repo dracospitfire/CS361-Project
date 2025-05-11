@@ -1,3 +1,4 @@
+import "./NavBar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -29,7 +30,7 @@ const NavBar = () => {
       <div className="logo">
         <Link to="/" className="rest-tool" onClick={resetDatabase}>
           <img src="./PP-logo.png" alt="PokeCyberpunk City Logo" width="50" height="55"/>
-          <span className="rest-tool-text">Reset Database</span>
+          <span className="rest-tool-text">Let's Play</span>
         </Link>
       </div>
       <nav className="internal-nav">

@@ -1,3 +1,4 @@
+import "./SocialBar.css";
 import React, { useState } from "react";
 
 const SocialBar = () => {
@@ -35,7 +36,7 @@ const SocialBar = () => {
         |
         <a href="https://www.tiktok.com/" onClick={(e) => handleExternalClick(e, "https://www.tiktok.com/")}>TikTok</a>
       </nav>
-      <aside className="socials">
+      <aside className="social">
         &copy; 2025 Austin Flores
         <strong>GitHub: </strong>
         <a href="https://github.com/dracospitfire/">
@@ -46,7 +47,7 @@ const SocialBar = () => {
       </aside>
       </footer>
       {showPopup && (
-        <article className="background">
+        <article className={`shadow ${showPopup ? "visible" : "hidden"}`}>
           <div className="confirmation">
             <p><strong>You are about to navigate to another site.</strong></p>
             <p>Are sure you want to leave this website without signing up?</p>

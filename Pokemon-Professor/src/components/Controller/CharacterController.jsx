@@ -293,7 +293,7 @@ export const CharacterController = ({ chestRef, onChestOpen }) => {
               <div className={chestOpened ? "pokemon-reward" : "open-chest"} >
                 {chestOpened ? (
                   <div className="pokemon-stats">
-                    <h2>You recieved, Pikachu!</h2>
+                    <h2 className="recieved">You recieved, Pikachu!</h2>
                     <button onClick={() => navigate('/maps')} className="pokemon-button">
                       <img src={Pikachu} alt="Pikachu" width={100} height={100} />
                     </button>
