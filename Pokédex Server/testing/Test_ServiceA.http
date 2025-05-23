@@ -1,0 +1,5 @@
+@pokemon = pikachu
+@BE_URL = http://localhost:2020/api
+
+### READ Poke Data ###
+GET {{BE_URL}}/baseStats/{{pokemon}} HTTP/1.1
