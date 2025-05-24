@@ -3,3 +3,4 @@
 
 ### READ Poke Data ###
 GET {{BE_URL}}/baseStats/{{pokemon}} HTTP/1.1
+Pokédex Server
