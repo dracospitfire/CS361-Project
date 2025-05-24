@@ -59,6 +59,15 @@ function HomePage() {
         </section>
       </main>
       <SocialBar />
+      <aside className="social">
+        &copy; 2025 Austin Flores
+        <strong>GitHub: </strong>
+        <a href="https://github.com/dracospitfire/">
+          <span className="github">
+            dracospitfire 
+          </span>
+        </a>
+      </aside>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import "./SocialBar.css";
-import React, { useState } from "react";
+import { useState } from "react";
+
 
 const SocialBar = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -25,26 +26,17 @@ const SocialBar = () => {
   return (
     <>
       <footer className="foot-nav">
-      <nav className="external-nav">
-        <a href="https://www.facebook.com/" onClick={(e) => handleExternalClick(e, "https://www.facebook.com/")}>Facebook</a> 
-        |
-        <a href="https://www.instagram.com/" onClick={(e) => handleExternalClick(e, "https://www.instagram.com/")}>Instagram</a> 
-        |
-        <a href="https://www.youtube.com/" onClick={(e) => handleExternalClick(e, "https://www.youtube.com/")}>YouTube</a> 
-        |
-        <a href="https://x.com/" onClick={(e) => handleExternalClick(e, "https://x.com/")}>X</a> 
-        |
-        <a href="https://www.tiktok.com/" onClick={(e) => handleExternalClick(e, "https://www.tiktok.com/")}>TikTok</a>
-      </nav>
-      <aside className="social">
-        &copy; 2025 Austin Flores
-        <strong>GitHub: </strong>
-        <a href="https://github.com/dracospitfire/">
-          <span className="github">
-            dracospitfire 
-          </span>
-        </a>
-      </aside>
+        <nav className="external-nav">
+          <a href="https://www.facebook.com/" onClick={(e) => handleExternalClick(e, "https://www.facebook.com/")}>Facebook</a> 
+          |
+          <a href="https://www.instagram.com/" onClick={(e) => handleExternalClick(e, "https://www.instagram.com/")}>Instagram</a> 
+          |
+          <a href="https://www.youtube.com/" onClick={(e) => handleExternalClick(e, "https://www.youtube.com/")}>YouTube</a> 
+          |
+          <a href="https://x.com/" onClick={(e) => handleExternalClick(e, "https://x.com/")}>X</a> 
+          |
+          <a href="https://www.tiktok.com/" onClick={(e) => handleExternalClick(e, "https://www.tiktok.com/")}>TikTok</a>
+        </nav>
       </footer>
       {showPopup && (
         <article className={`shadow ${showPopup ? "visible" : "hidden"}`}>

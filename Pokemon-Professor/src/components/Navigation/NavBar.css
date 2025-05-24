@@ -1,5 +1,6 @@
 header.head-nav {
   width: 90%;
+  max-height: 100%;
   margin: 2%;
   background-color: rgb(178, 235, 255, 0.7);   
   border: 1px solid black; 
@@ -10,10 +11,15 @@ header.head-nav {
 
 header.head-nav .logo {
   padding-top: 7px;
-  padding-left: 8px;
+  padding-left: 18px;
   padding-bottom: 3px;
+  max-height: 100%;
   display: flex;
   align-items: center;
+}
+
+header.head-nav .logo img {
+  max-height: 32px;
 }
 
 nav.internal-nav {
@@ -23,7 +29,7 @@ nav.internal-nav {
   align-items: center; 
   gap: 1%;
   font-family: var(--Franky); 
-  font-size: 25px;
+  font-size: 130%;
   color: black;                                                                 /* | Vertical seperators */
 }
 

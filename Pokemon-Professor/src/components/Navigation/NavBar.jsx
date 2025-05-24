@@ -29,7 +29,7 @@ const NavBar = () => {
     <header className="head-nav">
       <div className="logo">
         <Link to="/" className="rest-tool" onClick={resetDatabase}>
-          <img src="./PP-logo.png" alt="PokeCyberpunk City Logo" width="50" height="55"/>
+          <img src="./PP-logo.png" alt="PokeProfessor Logo" />
           <span className="rest-tool-text">Let's Play</span>
         </Link>
       </div>
